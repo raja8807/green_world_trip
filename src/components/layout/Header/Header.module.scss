@@ -1,0 +1,136 @@
+.mainHead {
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 70px;
+      .navLg {
+        ul {
+          display: flex;
+          gap: 40px;
+          padding: 0;
+          margin: 0;
+
+          li {
+            list-style: none;
+            position: relative;
+            z-index: 100;
+
+            a,
+            p {
+              color: $color_blue1;
+              // font-size: 18px;
+              font-size: 14px;
+              font-weight: 800;
+              cursor: pointer;
+              text-transform: uppercase;
+              letter-spacing: 1.2px;
+
+              &:hover {
+                color: $color_green1;
+              }
+            }
+
+            .dropdownWrap {
+              position: absolute;
+              top: 0px;
+              padding-top: 30px;
+
+              .dropdown {
+                background-color: white;
+
+                padding: 10px;
+                min-width: 220px;
+                border-radius: 4px;
+                display: flex;
+                flex-direction: column;
+                // gap: 16px;
+                // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+                animation: openDropDown 0.25s;
+                transform-origin: top;
+
+                .subDropdown {
+                  position: relative;
+
+                  a,
+                  p {
+                    // color: white;
+                    display: none;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+                    cursor: pointer;
+                  }
+
+                  .subDropdownWrap {
+                    position: absolute;
+                    top: -30px;
+                    left: 100%;
+                    padding-top: 30px;
+
+                    .subDropdown {
+                      background-color: $color_b1;
+                      padding: 10px;
+                      min-width: 250px;
+                      border-radius: 10px;
+                      display: flex;
+                      flex-direction: column;
+                      // gap: 16px;
+                      // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+                      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+                      animation: openDropDown 0.25s;
+                      transform-origin: top;
+                    }
+                  }
+                }
+
+                a,
+                p {
+                  // color: white;
+                  font-size: 13px;
+                  font-weight: bold;
+                  display: block;
+                  cursor: pointer;
+                  border-bottom: 1px solid rgb(213, 213, 213);
+                  padding: 8px 0;
+
+                  margin-bottom: 10px;
+
+                  &:hover {
+                    color: $color_green1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .right {
+      display: none;
+    }
+  }
+
+  @include respond-below(md) {
+    .wrap {
+      .left {
+        .navLg {
+          display: none;
+        }
+      }
+
+      .right {
+        display: flex;
+      }
+    }
+  }
+}

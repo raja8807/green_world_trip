@@ -1,0 +1,80 @@
+.TopHeader {
+  background-color: $color_green1;
+
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+
+    .left {
+      display: flex;
+      a {
+        color: white;
+        font-size: 14px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .soc {
+        display: flex;
+        gap: 12px;
+
+        svg {
+          color: #d1d4da;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+
+      a {
+        color: white;
+        font-size: 14px;
+        margin-top: 2px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.divider {
+  //   height: px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 16px;
+}
+
+.LangDropDown {
+  position: relative;
+
+  p {
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .dropDown {
+    position: absolute;
+    background-color: white;
+
+    right: 0;
+
+    z-index: 100;
+
+    p {
+      border: 1px solid $color_green1;
+      padding: 2px 10px;
+      color: $color_green1;
+
+      &:hover {
+        background-color: $color_green1;
+        color: white;
+      }
+    }
+  }
+}

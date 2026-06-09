@@ -1,0 +1,54 @@
+.HomeScreen {
+  background: linear-gradient(rgba(0, 0, 0, 0)), url("/images/bg.jpeg");
+  background-size: cover;
+  background-position: center;
+
+  .cont {
+    height: 100vh;
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+      font-weight: bold;
+      color: white;
+      font-size: 70px;
+      line-height: 65px;
+      margin-bottom: 16px;
+    }
+
+    .count {
+      max-width: 400px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      text-align: center;
+      color: white;
+      > div {
+        background-color: rgba(222, 222, 222, 0.1);
+        width: 70px;
+        height: 70px;
+        @include flexCenter;
+        flex-direction: column;
+        border-radius: 10px;
+        backdrop-filter: blur(2px);
+      }
+    }
+  }
+
+  @include respond-below(md) {
+    .cont {
+      align-items: center;
+
+      h1 {
+        text-align: center;
+        font-size: 55px;
+      }
+
+      .count {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+    }
+  }
+}
