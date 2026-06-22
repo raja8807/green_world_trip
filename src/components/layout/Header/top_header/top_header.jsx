@@ -6,8 +6,11 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  EnvelopeFill,
+  TelephoneFill,
 } from "react-bootstrap-icons";
 import Link from "next/link";
+import { CONTACT_DETAILS } from "@/constants/conatct";
 
 const LangDropDown = () => {
   const languages = ["ENG", "HIN"];
@@ -59,11 +62,17 @@ const TopHeader = () => {
             </div>
             <div className={styles.divider}></div>
 
-            <Link href={"/"}>test@gmail.com</Link>
+            <a href={`mailto:${CONTACT_DETAILS.emails[0]}`} className={styles.contactLink}>
+              <EnvelopeFill className={styles.iconOnly} />
+              <span className={styles.textOnly}>{CONTACT_DETAILS.emails[0]}</span>
+            </a>
           </div>
 
           <div className={styles.right}>
-            <Link href={"/"}>+91 98765 41230</Link>
+            <a href={`tel:+${CONTACT_DETAILS.phone1.number}`} className={styles.contactLink}>
+              <TelephoneFill className={styles.iconOnly} />
+              <span className={styles.textOnly}>{CONTACT_DETAILS.phone1.text}</span>
+            </a>
             <div className={styles.divider}></div>
             <LangDropDown />
           </div>

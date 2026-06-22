@@ -28,6 +28,10 @@ export const PAGES = [
     title: "honey Moon",
     href: "/honey-moon",
   },
+  {
+    title: "Group Tours",
+    href: "/group-tours",
+  },
 
   { title: "India", href: "/india" },
   { title: "Contact", href: "/contact" },
@@ -129,5 +133,56 @@ export const TESTIMONIALS = [
     name: "Mrs. Sridevi",
     location: "Chennai – Visa Processing (Canada Visa)",
     text: "Applying for a Canada visa felt effortless thanks to the Amigos Business Solutions team. They handled everything with precision and care, guiding me through the complex process and ensuring all requirements were met.",
+  },
+];
+
+export const COMPANY_STATS = [
+  { id: 1, value: "100+", label: "packages" },
+  { id: 2, value: "2k+", label: "destination" },
+  { id: 3, value: "300+", label: "destinations" },
+  { id: 4, value: "40k+", label: "booking" },
+];
+
+export const LEADERSHIP_TEAM = [
+  { id: 1, name: "David Allen", role: "CEO", image: "/assets/placeholder-avatar.jpg" },
+  { id: 2, name: "David Parker", role: "COO", image: "/assets/placeholder-avatar.jpg" },
+  { id: 3, name: "Sarah Neil", role: "General Manager", image: "/assets/placeholder-avatar.jpg" },
+  { id: 4, name: "Charles Longton", role: "Sales Target", image: "/assets/placeholder-avatar.jpg" },
+  { id: 5, name: "Maria Morris", role: "Tour Manager", image: "/assets/placeholder-avatar.jpg" },
+  { id: 6, name: "Tim Christopher", role: "Designer", image: "/assets/placeholder-avatar.jpg" },
+  { id: 7, name: "Kelly Bell", role: "HR Manager", image: "/assets/placeholder-avatar.jpg" },
+  { id: 8, name: "Marina Amanda", role: "Lead Manager", image: "/assets/placeholder-avatar.jpg" },
+];
+
+export const TOUR_CATEGORIES = [
+  {
+    id: 1,
+    title: "Domestic Tours",
+    subtitle: "BOOK TODAY",
+    offer: "Save Up to 30% on Next Adventure!",
+    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80",
+    colLg: 4,
+    colMd: 6,
+    delay: 0,
+  },
+  {
+    id: 2,
+    title: "International Tours",
+    subtitle: "BOOK TODAY",
+    offer: "Save Up to 30% on Next Adventure!",
+    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1420&q=80",
+    colLg: 4,
+    colMd: 6,
+    delay: 100,
+  },
+  {
+    id: 3,
+    title: "Custom Tours",
+    subtitle: "BOOK TODAY",
+    offer: "Save Up to 30% on Next Adventure!",
+    image: "https://images.unsplash.com/photo-1504681869696-d977211a5f4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1452&q=80",
+    colLg: 4,
+    colMd: 12,
+    delay: 200,
   },
 ];

@@ -8,7 +8,7 @@
 - **State Management**: React Context (`AppContext.js`)
 - **Animation**: AOS (Animate on Scroll)
 - **Routing Progress**: NProgress
-- **Fonts**: Next.js Google Fonts (`Manrope`, `Oxanium`)
+- **Fonts**: Next.js Google Fonts
 
 ## 2. Folder Structure
 
@@ -45,9 +45,6 @@ src/
 
 ### Typography (`src/styles/fonts.js`)
 
-- **Primary Font**: `Manrope`
-- **Secondary Pattern**: `Oxanium`
-
 ### Layout & Mixins (`src/styles/scss/_mixins.scss`)
 
 - Custom utilities exist for structural alignment such as `@mixin flexCenter`.
@@ -66,3 +63,5 @@ src/
 - **Assets**: Keep static assets within the `public/` directory.
 - **Routing Loading State**: Keep `LoadingScreen` logic robust to avoid flash-of-unstyled-content during route swapping inside `_app.jsx`. NProgress handles the navigation loading indicator.
 - **Data Fetching/Holding**: Keep heavy datasets (e.g., specific tours, services logic) strictly contained within `constants/` or queried globally using `context/` rather than jamming them within UI components.
+- **Layout Wrapper**: Do not wrap individual pages in `<Layout>`. The `<Layout>` wrapper is already applied globally inside `src/pages/_app.jsx`.
+- **SCSS Imports**: Do not manually `@import` `_variables.scss`, `_mixins.scss`, or `_media_queries.scss` inside individual SCSS module files. These are automatically prepended globally via `sassOptions` in `next.config.js`.

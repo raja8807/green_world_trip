@@ -1,0 +1,47 @@
+.quoteSection {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .quoteText {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: $color_b2;
+    margin-bottom: 30px;
+    line-height: 1.8;
+  }
+
+  .authorInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 15px;
+      border: 3px solid #eee;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .name {
+      font-weight: 700;
+      color: $color_b2;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .role {
+      color: #666;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+}

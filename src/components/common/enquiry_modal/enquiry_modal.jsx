@@ -55,6 +55,15 @@ const EnquiryModal = ({ show, setShow }) => {
                         />
                     </Form.Group>
 
+                    <Form.Group className="mb-3">
+                        <Form.Control 
+                            type="number" 
+                            placeholder="No. of People *" 
+                            min="1"
+                            required 
+                            className={styles.formControl} 
+                        />
+                    </Form.Group>
 
                     <Form.Group className="mb-4">
                         <Form.Select required className={styles.formControl} defaultValue="">

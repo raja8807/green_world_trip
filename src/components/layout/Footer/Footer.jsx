@@ -97,7 +97,7 @@ const Footer = () => {
 
           <Col lg={3} md={6} sm={12} className={styles.footerCol}>
             <h4 className={`${styles.widgetTitle} ${FONTS.font2}`}>
-              Our Services
+              Popular Destinations
             </h4>
           </Col>
 

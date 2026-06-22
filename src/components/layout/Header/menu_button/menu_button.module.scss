@@ -19,7 +19,7 @@
   }
 
   .callBtn {
-    background-color: $color_1;
+    background-color: $color_blue1;
     color: white;
     border: none;
     padding: 8px 20px;
@@ -93,7 +93,7 @@
 
       &:hover {
         p {
-          color: $color_1;
+          color: $color_blue1;
         }
       }
     }
@@ -141,7 +141,7 @@
       padding-left: 15px;
       margin-top: 5px;
       margin-bottom: 10px;
-      border-left: 2px solid rgba($color_1, 0.15);
+      border-left: 2px solid rgba($color_blue1, 0.15);
 
       a {
         margin-left: 0;
@@ -154,8 +154,8 @@
         border-radius: 6px;
 
         &:hover {
-          background: rgba($color_1, 0.08);
-          color: $color_1 !important;
+          background: rgba($color_blue1, 0.08);
+          color: $color_blue1 !important;
           transform: translateX(3px);
           box-shadow: none;
         }

@@ -1,0 +1,135 @@
+.contactSection {
+  padding: 80px 0;
+  background-color: #fcfcfc;
+}
+
+.infoCard {
+  @include defaultBox;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease;
+  background: white;
+
+  &:hover {
+    .iconWrapper {
+      background-color: $color_primary_1;
+      color: white;
+    }
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(
+      $color_green1,
+      0.1
+    ); // Fallback color if variable issue
+    color: $color_primary_1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-right: 20px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .content {
+    h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $color_b2;
+      margin-bottom: 8px;
+    }
+
+    p,
+    a {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+      display: block;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $color_primary_1;
+    }
+  }
+}
+
+.formCard {
+  @include defaultBox;
+  padding: 40px;
+  background: white;
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $color_b2;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .formGroup {
+    margin-bottom: 20px;
+
+    label {
+      font-weight: 600;
+      color: $color_b2;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      color: $color_b2;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $color_primary_1;
+        background-color: white;
+      }
+    }
+  }
+
+  .submitBtn {
+    background-color: $color_primary_1;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+
+    &:hover {
+      background-color: #111; // dark hover state
+    }
+  }
+}
+
+.mapSection {
+  width: 100%;
+  height: 450px;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}

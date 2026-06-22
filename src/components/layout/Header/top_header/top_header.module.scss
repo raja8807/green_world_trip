@@ -40,6 +40,25 @@
         }
       }
     }
+    .contactLink {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .iconOnly {
+        display: none;
+      }
+
+      @include respond-below(md) {
+        .iconOnly {
+          display: inline-block;
+          font-size: 16px;
+        }
+        .textOnly {
+          display: none;
+        }
+      }
+    }
   }
 }
 
