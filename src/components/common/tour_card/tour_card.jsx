@@ -7,44 +7,34 @@ import {
   GeoAlt,
   Clock,
   HeartFill,
-  StarFill,
-  StarHalf,
-  Star,
   LightningChargeFill,
 } from "react-bootstrap-icons";
 import Link from "next/link";
 
-const TourCard = ({tour}) => {
+const TourCard = ({ tour }) => {
   const [liked, setLiked] = useState(false);
 
-//   const tour = {
-//     id: 4,
-//     title: "Swiss Alps Mountain Journey",
-//     location: "Switzerland",
-//     image: "/images/tour-4.jpg",
-//     profile: "/images/profile-4.jpg",
-//     featured: true,
-//     discount: "-20%",
-//     reviews: 15,
-//     rating: 4.5,
-//     duration: "3 days",
-//     price: "$850",
-//   };
+  // Safely extract the image url
+  const imageUrl = tour.main_image || "/tour.png";
 
   return (
-    <Link href={"/"}>
+    <Link href={`/tours/${tour.slug}`}>
       <div className={styles.card}>
         {/* Image Section */}
         <div className={styles.imageWrapper}>
-          <Image src="/tour.png" alt="Tour" className={styles.image} fluid />
+          <Image src={imageUrl} alt={tour.name} className={styles.image} fluid />
 
-          <div className={styles.featured}>Featured</div>
-
-          {/* <div className={styles.discount}>-11%</div> */}
+          {/* Optional Flags mapping */}
+          {tour.flags?.is_featured && (
+            <div className={styles.featured}>Featured</div>
+          )}
 
           <button
             className={`${styles.favoriteBtn} ${liked ? styles.active : ""}`}
-            onClick={() => setLiked(!liked)}
+            onClick={(e) => {
+              e.preventDefault(); // prevent routing when liking
+              setLiked(!liked);
+            }}
           >
             <HeartFill />
           </button>
@@ -54,36 +44,27 @@ const TourCard = ({tour}) => {
         <div className={styles.content}>
           <div className={styles.location}>
             <GeoAlt />
-            <span>{tour.location}</span>
+            <span>{tour.location || tour.state_country}</span>
           </div>
 
-          <h3>{tour.title}</h3>
+          <h3>{tour.name}</h3>
 
-          <div className={styles.reviewRow}>
-            <div className={styles.stars}>
-              <StarFill />
-              <StarFill />
-              <StarFill />
-              <StarHalf />
-              <Star />
-            </div>
-
-            <span>{tour.reviews} Reviews</span>
-          </div>
+          {/* Reviews removed per instructions */}
 
           <div className={styles.bottomRow}>
             <div className={styles.duration}>
               <Clock />
-              <span>{tour.duration}</span>
+              <span>
+                {tour.duration_days} Days / {tour.duration_nights} Nights
+              </span>
             </div>
 
+            {/* Price removed per instructions */}
             <div className={styles.price}>
               <small>
                 <LightningChargeFill />
-                from
+                Explore
               </small>
-
-              <span>{tour.price}</span>
             </div>
           </div>
         </div>

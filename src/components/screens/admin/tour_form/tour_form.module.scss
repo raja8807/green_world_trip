@@ -1,0 +1,24 @@
+.adminFormPage {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1f2d4d;
+    margin: 0;
+  }
+}
+
+.formContainer {
+  // max-width: 1000px;
+  margin: 0 auto;
+}

@@ -1,79 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./trending.module.scss";
 import TourCard from "@/components/common/tour_card/tour_card";
 import CustomContainer from "@/components/ui/custom_container/custom_container";
 import { Col, Row } from "react-bootstrap";
+import { supabase } from "@/lib/supabaseClient";
 
 const TrendingTours = () => {
-  const tours = [
-    {
-      id: 1,
-      title: "American Parks Trail end Rapid City",
-      location: "Nevada, American",
-      image: "/images/tour-1.jpg",
-      profile: "/images/profile-1.jpg",
-      featured: true,
-      discount: "-11%",
-      reviews: 7,
-      rating: 4.5,
-      duration: "8 hours",
-      price: "₹0,00",
-    },
-    {
-      id: 2,
-      title: "Discover Beautiful Bali Beaches",
-      location: "Bali, Indonesia",
-      image: "/images/tour-2.jpg",
-      profile: "/images/profile-2.jpg",
-      featured: true,
-      discount: "-15%",
-      reviews: 12,
-      rating: 5,
-      duration: "5 days",
-      price: "₹299",
-    },
-    {
-      id: 3,
-      title: "Dubai Desert Safari Adventure",
-      location: "Dubai, UAE",
-      image: "/images/tour-3.jpg",
-      profile: "/images/profile-3.jpg",
-      featured: false,
-      discount: "-8%",
-      reviews: 20,
-      rating: 4,
-      duration: "6 hours",
-      price: "₹120",
-    },
-    {
-      id: 4,
-      title: "Swiss Alps Mountain Journey",
-      location: "Switzerland",
-      image: "/images/tour-4.jpg",
-      profile: "/images/profile-4.jpg",
-      featured: true,
-      discount: "-20%",
-      reviews: 15,
-      rating: 4.5,
-      duration: "3 days",
-      price: "₹850",
-    },
-  ];
+  const [tours, setTours] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTrendingTours = async () => {
+      try {
+        // Fetch tours where the flags JSONB column contains { "is_trending": true }
+        const { data, error } = await supabase
+          .from("tours")
+          .select("*")
+          .contains('flags', { is_trending: true })
+          .limit(4);
+
+        if (error) throw error;
+        
+        // Fallback: If no tours are marked 'is_trending', try 'is_featured'
+        if (!data || data.length === 0) {
+           const { data: featuredData, error: featuredError } = await supabase
+             .from("tours")
+             .select("*")
+             .contains('flags', { is_featured: true })
+             .limit(4);
+           
+           if (!featuredError) setTours(featuredData || []);
+        } else {
+           setTours(data);
+        }
+      } catch (error) {
+        console.error("Error fetching trending tours:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrendingTours();
+  }, []);
 
   return (
     <section className={styles.TrendingTours} data-aos="fade-up">
       <CustomContainer>
         <h2>Trending Tours</h2>
         <div className={styles.wrap}>
-          <Row>
-            {tours.map((tour) => {
-              return (
-                <Col key={tour.id} xs={12} md={6} lg={3}>
-                  <TourCard tour={tour} />
-                </Col>
-              );
-            })}
-          </Row>
+          {loading ? (
+             <p className="text-muted">Loading trending tours...</p>
+          ) : tours && tours.length > 0 ? (
+            <Row>
+              {tours.map((tour) => {
+                return (
+                  <Col key={tour.id} xs={12} md={6} lg={3} className="mb-4">
+                    <TourCard tour={tour} />
+                  </Col>
+                );
+              })}
+            </Row>
+          ) : (
+             <p className="text-muted">No trending tours available right now.</p>
+          )}
         </div>
       </CustomContainer>
     </section>

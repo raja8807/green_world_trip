@@ -1,0 +1,103 @@
+.itinerarySection {
+  margin-top: 0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  .sectionTitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: #1f2d4d;
+    margin: 0;
+  }
+
+  .expandBtn {
+    background: transparent;
+    border: none;
+    color: #28a8ff;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.accordionGroup {
+  // Override bootstrap defaults
+  :global(.accordion-item) {
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border-left: 4px solid #28a745; // Green line
+    overflow: hidden;
+  }
+  
+  :global(.accordion-item:nth-child(even)) {
+    border-left-color: #4285F4; // Blue line for alternating
+  }
+
+  :global(.accordion-button) {
+    background-color: transparent !important;
+    color: #1f2d4d !important;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 20px 25px;
+    box-shadow: none !important;
+
+    &::after {
+      background-size: 14px;
+    }
+  }
+
+  :global(.accordion-button:not(.collapsed)) {
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  :global(.accordion-body) {
+    padding: 25px;
+  }
+}
+
+.bodyContent {
+  display: flex;
+  gap: 25px;
+
+  .imageWrapper {
+    flex-shrink: 0;
+    width: 250px;
+    height: 160px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+
+  .textWrapper {
+    p {
+      color: #495057;
+      line-height: 1.6;
+      font-size: 15px;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .bodyContent {
+    flex-direction: column;
+
+    .imageWrapper {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

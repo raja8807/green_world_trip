@@ -144,14 +144,54 @@ export const COMPANY_STATS = [
 ];
 
 export const LEADERSHIP_TEAM = [
-  { id: 1, name: "David Allen", role: "CEO", image: "/assets/placeholder-avatar.jpg" },
-  { id: 2, name: "David Parker", role: "COO", image: "/assets/placeholder-avatar.jpg" },
-  { id: 3, name: "Sarah Neil", role: "General Manager", image: "/assets/placeholder-avatar.jpg" },
-  { id: 4, name: "Charles Longton", role: "Sales Target", image: "/assets/placeholder-avatar.jpg" },
-  { id: 5, name: "Maria Morris", role: "Tour Manager", image: "/assets/placeholder-avatar.jpg" },
-  { id: 6, name: "Tim Christopher", role: "Designer", image: "/assets/placeholder-avatar.jpg" },
-  { id: 7, name: "Kelly Bell", role: "HR Manager", image: "/assets/placeholder-avatar.jpg" },
-  { id: 8, name: "Marina Amanda", role: "Lead Manager", image: "/assets/placeholder-avatar.jpg" },
+  {
+    id: 1,
+    name: "David Allen",
+    role: "CEO",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 2,
+    name: "David Parker",
+    role: "COO",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 3,
+    name: "Sarah Neil",
+    role: "General Manager",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 4,
+    name: "Charles Longton",
+    role: "Sales Target",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 5,
+    name: "Maria Morris",
+    role: "Tour Manager",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 6,
+    name: "Tim Christopher",
+    role: "Designer",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 7,
+    name: "Kelly Bell",
+    role: "HR Manager",
+    image: "/assets/placeholder-avatar.jpg",
+  },
+  {
+    id: 8,
+    name: "Marina Amanda",
+    role: "Lead Manager",
+    image: "/assets/placeholder-avatar.jpg",
+  },
 ];
 
 export const TOUR_CATEGORIES = [
@@ -160,29 +200,90 @@ export const TOUR_CATEGORIES = [
     title: "Domestic Tours",
     subtitle: "BOOK TODAY",
     offer: "Save Up to 30% on Next Adventure!",
-    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80",
+    image:
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80",
     colLg: 4,
     colMd: 6,
     delay: 0,
+    href: "/domestic",
   },
   {
     id: 2,
     title: "International Tours",
     subtitle: "BOOK TODAY",
     offer: "Save Up to 30% on Next Adventure!",
-    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1420&q=80",
+    image:
+      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1420&q=80",
     colLg: 4,
     colMd: 6,
     delay: 100,
+    href: "/international",
   },
   {
     id: 3,
     title: "Custom Tours",
     subtitle: "BOOK TODAY",
     offer: "Save Up to 30% on Next Adventure!",
-    image: "https://images.unsplash.com/photo-1504681869696-d977211a5f4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1452&q=80",
+    image:
+      "https://images.unsplash.com/photo-1504681869696-d977211a5f4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1452&q=80",
     colLg: 4,
     colMd: 12,
     delay: 200,
+    href: "/domestic",
   },
+];
+
+export const DOMESTIC_REGIONS = [
+  {
+    region: "North India",
+    states: [
+      "Agra", "Amritsar", "Ayodhya", "Chandigarh", "Delhi", "Gulmarg", 
+      "Haridwar & Rishikesh", "Himachal Pradesh", "Jaipur", "Jaisalmer", 
+      "Jammu and Kashmir", "Ladakh", "Lucknow", "Manali", "Mussoorie", 
+      "Nainital", "Pahalgam", "Shimla", "Srinagar", "Uttarakhand", 
+      "Varanasi", "Vrindavan"
+    ]
+  },
+  {
+    region: "South India",
+    states: [
+      "Alleppey", "Araku Valley", "Bangalore", "Chennai", "Chettinad", 
+      "Coorg", "Hyderabad", "Kanyakumari", "Karnataka", "Kerala", "Kochi", 
+      "Madurai", "Munnar", "Mysore", "Ooty", "Rameswaram", "Tamil Nadu", 
+      "Thekkady", "Tirupati", "Vizag", "Wayanad"
+    ]
+  },
+  {
+    region: "East India",
+    states: [
+      "Bihar", "Darjeeling", "Jharkhand", "Kolkata", "Odisha", "Puri", "West Bengal"
+    ]
+  },
+  {
+    region: "West India",
+    states: [
+      "Ahmedabad", "Goa", "Gujarat", "Jodhpur", "Mahabaleshwar", "Maharashtra", 
+      "Mumbai", "Nashik", "Pune", "Rajasthan", "Shirdi", "Udaipur"
+    ]
+  },
+  {
+    region: "North East",
+    states: [
+      "Arunachal Pradesh", "Assam", "Gangtok", "Guwahati", "Manipur", 
+      "Meghalaya", "Pelling", "Shillong", "Sikkim", "Tawang"
+    ]
+  },
+  {
+    region: "Central India",
+    states: [
+      "Bhopal", "Chhattisgarh", "Gwalior", "Indore", "Madhya Pradesh", 
+      "Pachmarhi", "Ujjain"
+    ]
+  },
+  {
+    region: "Spiritual",
+    states: [
+      "Ayodhya", "kasi"
+    ]
+  }
 ];

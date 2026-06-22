@@ -1,0 +1,13 @@
+.tourDetailsPage {
+  background-color: #fff;
+  padding-bottom: 80px;
+}
+
+.contentWrapper {
+  max-width: 950px;
+  margin: 0 auto;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px; // Spacing between the major sections
+}
