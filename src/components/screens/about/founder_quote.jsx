@@ -7,9 +7,9 @@ const FounderQuote = () => {
     <Container>
       <div className={styles.quoteSection} data-aos="fade-up">
         <p className={styles.quoteText}>
-          "Aenean sollicitudin, erat a elementum rutrum, neque sem pretium
+          &quot;Aenean sollicitudin, erat a elementum rutrum, neque sem pretium
           metus, quis mollis molestie et massa. Nam dapibus nisl vitae elit
-          fringilla rutrum."
+          fringilla rutrum.&quot;
         </p>
         <div className={styles.authorInfo}>
           <div className={styles.avatar}>
