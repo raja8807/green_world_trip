@@ -27,24 +27,6 @@
   animation: slideDown 0.3s ease-out;
   transform: none !important; /* override aos */
 
-  /* Slim down on desktop */
-  .field {
-    padding: 8px 16px;
-
-    label {
-      font-size: 12px;
-      margin-bottom: 2px;
-    }
-  }
-
-  .searchBtn {
-    min-width: 100px;
-    margin: 8px 16px;
-    border-radius: 8px;
-    font-size: 14px;
-    min-height: auto;
-  }
-
   @media (max-width: 900px) {
     flex-direction: row; // Keep it single line when sticky even on mobile to save space
     height: 70px;
