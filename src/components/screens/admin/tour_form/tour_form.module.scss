@@ -1,24 +1,90 @@
 .adminFormPage {
-  padding: 80px 0;
-  background-color: #f8f9fa;
+  padding: 60px 0;
+  background-color: #f4f6f9; // Clean, soft background
   min-height: 100vh;
-}
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 
-  h2 {
-    font-size: 28px;
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+      margin: 0;
+    }
+  }
+
+  .formContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  // Global Form Overrides
+  :global(.card) {
+    border: none !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.03) !important;
+    margin-bottom: 30px;
+    border-radius: 4px;
+  }
+
+  :global(.card-title) {
+    font-size: 16px;
     font-weight: 600;
-    color: #1f2d4d;
-    margin: 0;
+    color: #3f4254;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eff2f5;
+  }
+
+  :global(.form-label) {
+    font-weight: 500;
+    color: #3f4254;
+    font-size: 14px;
+  }
+
+  :global(.form-control),
+  :global(.form-select) {
+    border: 1px solid #e4e6ef;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #3f4254;
+    border-radius: 4px;
+    box-shadow: none !important;
+    background-color: #ffffff;
+
+    &:focus {
+      border-color: #3e64ff; // Reference blue focus
+    }
+  }
+
+  :global(.form-control:read-only),
+  :global(.form-control:disabled),
+  :global(.form-select:disabled) {
+    background-color: #f5f8fa !important;
+    color: #a1a5b7;
+    border-color: #e4e6ef;
+  }
+
+  :global(.btn-primary) {
+    background-color: #3e64ff;
+    border-color: #3e64ff;
+    border-radius: 4px;
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 14px;
+
+    &:hover {
+      background-color: darken(#3e64ff, 5%);
+    }
   }
 }
 
-.formContainer {
-  // max-width: 1000px;
-  margin: 0 auto;
+// Arrays custom styles
+.arrayItem {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
 }

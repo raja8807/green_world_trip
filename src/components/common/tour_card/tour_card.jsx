@@ -22,12 +22,21 @@ const TourCard = ({ tour }) => {
       <div className={styles.card}>
         {/* Image Section */}
         <div className={styles.imageWrapper}>
-          <Image src={imageUrl} alt={tour.name} className={styles.image} fluid />
+          <Image
+            src={imageUrl}
+            alt={tour.name}
+            className={styles.image}
+            fluid
+          />
 
           {/* Optional Flags mapping */}
           {tour.flags?.is_featured && (
             <div className={styles.featured}>Featured</div>
           )}
+
+           <div className={styles.tag}>
+            <small>{tour.category_type.toUpperCase()}</small>
+          </div>
 
           <button
             className={`${styles.favoriteBtn} ${liked ? styles.active : ""}`}
@@ -46,7 +55,6 @@ const TourCard = ({ tour }) => {
             <GeoAlt />
             <span>{tour.location || tour.state_country}</span>
           </div>
-
           <h3>{tour.name}</h3>
 
           {/* Reviews removed per instructions */}
@@ -58,15 +66,17 @@ const TourCard = ({ tour }) => {
                 {tour.duration_days} Days / {tour.duration_nights} Nights
               </span>
             </div>
-
-            {/* Price removed per instructions */}
-            <div className={styles.price}>
-              <small>
-                <LightningChargeFill />
-                Explore
-              </small>
-            </div>
           </div>
+
+          {
+            tour.destinations && <div className={styles.destinations}>
+              {
+                tour.destinations.map((des)=> <p key={des}>{des}</p>)
+              }
+              </div>
+          }
+
+         
         </div>
       </div>
     </Link>

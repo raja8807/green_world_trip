@@ -1,32 +1,43 @@
-import React from 'react';
-import { supabase } from '@/lib/supabaseClient';
-import ToursScreen from '@/components/screens/tours/tours';
+import React from "react";
+import { supabase } from "@/lib/supabaseClient";
+import ToursScreen from "@/components/screens/tours/tours";
 
-export default function DestinationToursPage({ tours, error, destination, category }) {
+export default function DestinationToursPage({
+  tours,
+  error,
+  destination,
+  category,
+}) {
   // Format the destination name for display
-  const formattedDestination = destination.replace(/-/g, ' ');
-  return <ToursScreen tours={tours} error={error} category={formattedDestination} />;
+  const formattedDestination = destination.replace(/-/g, " ");
+  return (
+    <ToursScreen tours={tours} error={error} category={formattedDestination} />
+  );
 }
 
 export async function getServerSideProps({ params }) {
   const { category, destination } = params;
 
-  if (category !== 'domestic' && category !== 'international') {
+  if (
+    category !== "domestic" &&
+    category !== "international" &&
+    category !== "honeymoon"
+  ) {
     return {
       notFound: true,
     };
   }
 
   // We use ilike in Supabase which is case-insensitive
-  const searchDestination = destination.replace(/-/g, ' ');
+  const searchDestination = destination.replace(/-/g, " ");
 
   try {
     const { data: tours, error } = await supabase
-      .from('tours')
-      .select('*')
-      .eq('category_type', category)
-      .ilike('state_country', `%${searchDestination}%`)
-      .order('created_at', { ascending: false });
+      .from("tours")
+      .select("*")
+      .eq("category_type", category)
+      .ilike("state_country", `%${searchDestination}%`)
+      .order("created_at", { ascending: false });
 
     if (error) throw error;
 
@@ -34,7 +45,7 @@ export async function getServerSideProps({ params }) {
       props: {
         tours: tours || [],
         destination,
-        category
+        category,
       },
     };
   } catch (error) {
@@ -44,7 +55,7 @@ export async function getServerSideProps({ params }) {
         tours: [],
         error: error.message,
         destination,
-        category
+        category,
       },
     };
   }

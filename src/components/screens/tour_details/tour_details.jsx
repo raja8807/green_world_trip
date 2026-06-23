@@ -5,9 +5,14 @@ import ItinerarySection from './sections/itinerary/itinerary';
 import IncludedExcludedSection from './sections/included_excluded/included_excluded';
 import FaqsSection from './sections/faqs/faqs';
 import ReviewsSection from './sections/reviews/reviews';
+import GallerySection from './sections/gallery/gallery';
 import styles from './tour_details.module.scss';
 
 const TourDetailsScreen = ({ tour, itineraries, faqs, reviews }) => {
+
+  
+  
+
   return (
     <div className={styles.tourDetailsPage}>
       {/* Overview contains the Banner and the Top Text content */}
@@ -25,6 +30,10 @@ const TourDetailsScreen = ({ tour, itineraries, faqs, reviews }) => {
           
           {faqs && faqs.length > 0 && (
             <FaqsSection faqs={faqs} />
+          )}
+          
+          {tour?.images && tour.images.length > 0 && (
+            <GallerySection images={tour.images} />
           )}
           
           <ReviewsSection reviews={reviews} tourId={tour.id} />

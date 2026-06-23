@@ -1,4 +1,11 @@
+.header {
+  position: relative;
+  z-index: 1000;
+}
+
 .mainHead {
+  position: relative;
+
   .wrap {
     display: flex;
     justify-content: space-between;
@@ -9,6 +16,7 @@
       display: flex;
       align-items: center;
       gap: 70px;
+
       .navLg {
         ul {
           display: flex;
@@ -19,7 +27,6 @@
           li {
             list-style: none;
             position: relative;
-            z-index: 100;
 
             a,
             p {
@@ -44,12 +51,12 @@
               .dropdown {
                 background-color: white;
 
-                padding: 10px;
+                padding: 18px 16px;
                 min-width: 220px;
                 border-radius: 4px;
                 display: flex;
                 flex-direction: column;
-                // gap: 16px;
+                gap: 16px;
                 // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
                 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
@@ -99,10 +106,9 @@
                   font-weight: bold;
                   display: block;
                   cursor: pointer;
-                  border-bottom: 1px solid rgb(213, 213, 213);
-                  padding: 8px 0;
+                  // border-bottom: 1px solid rgb(213, 213, 213);
 
-                  margin-bottom: 10px;
+                  // margin-bottom: 10px;
 
                   &:hover {
                     color: $color_green1;

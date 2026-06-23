@@ -25,8 +25,22 @@ export const PAGES = [
     href: "/company",
   },
   {
-    title: "honey Moon",
-    href: "/honey-moon",
+    title: "Tours",
+
+    dropdown: [
+      {
+        title: "Domestic",
+        href: "/domestic",
+      },
+      {
+        title: "International",
+        href: "/international",
+      },
+    ],
+  },
+  {
+    title: "Honey Moon",
+    href: "/honeymoon",
   },
   {
     title: "Group Tours",
@@ -221,7 +235,7 @@ export const TOUR_CATEGORIES = [
   },
   {
     id: 3,
-    title: "Custom Tours",
+    title: "Honeymoon ",
     subtitle: "BOOK TODAY",
     offer: "Save Up to 30% on Next Adventure!",
     image:
@@ -229,7 +243,7 @@ export const TOUR_CATEGORIES = [
     colLg: 4,
     colMd: 12,
     delay: 200,
-    href: "/domestic",
+    href: "/honeymoon",
   },
 ];
 
@@ -237,53 +251,114 @@ export const DOMESTIC_REGIONS = [
   {
     region: "North India",
     states: [
-      "Agra", "Amritsar", "Ayodhya", "Chandigarh", "Delhi", "Gulmarg", 
-      "Haridwar & Rishikesh", "Himachal Pradesh", "Jaipur", "Jaisalmer", 
-      "Jammu and Kashmir", "Ladakh", "Lucknow", "Manali", "Mussoorie", 
-      "Nainital", "Pahalgam", "Shimla", "Srinagar", "Uttarakhand", 
-      "Varanasi", "Vrindavan"
-    ]
+      "Agra",
+      "Amritsar",
+      "Ayodhya",
+      "Chandigarh",
+      "Delhi",
+      "Gulmarg",
+      "Haridwar & Rishikesh",
+      "Himachal Pradesh",
+      "Jaipur",
+      "Jaisalmer",
+      "Jammu and Kashmir",
+      "Ladakh",
+      "Lucknow",
+      "Manali",
+      "Mussoorie",
+      "Nainital",
+      "Pahalgam",
+      "Shimla",
+      "Srinagar",
+      "Uttarakhand",
+      "Varanasi",
+      "Vrindavan",
+    ],
   },
   {
     region: "South India",
     states: [
-      "Alleppey", "Araku Valley", "Bangalore", "Chennai", "Chettinad", 
-      "Coorg", "Hyderabad", "Kanyakumari", "Karnataka", "Kerala", "Kochi", 
-      "Madurai", "Munnar", "Mysore", "Ooty", "Rameswaram", "Tamil Nadu", 
-      "Thekkady", "Tirupati", "Vizag", "Wayanad"
-    ]
+      "Alleppey",
+      "Araku Valley",
+      "Bangalore",
+      "Chennai",
+      "Chettinad",
+      "Coorg",
+      "Hyderabad",
+      "Kanyakumari",
+      "Karnataka",
+      "Kerala",
+      "Kochi",
+      "Madurai",
+      "Munnar",
+      "Mysore",
+      "Ooty",
+      "Rameswaram",
+      "Tamil Nadu",
+      "Thekkady",
+      "Tirupati",
+      "Vizag",
+      "Wayanad",
+    ],
   },
   {
     region: "East India",
     states: [
-      "Bihar", "Darjeeling", "Jharkhand", "Kolkata", "Odisha", "Puri", "West Bengal"
-    ]
+      "Bihar",
+      "Darjeeling",
+      "Jharkhand",
+      "Kolkata",
+      "Odisha",
+      "Puri",
+      "West Bengal",
+    ],
   },
   {
     region: "West India",
     states: [
-      "Ahmedabad", "Goa", "Gujarat", "Jodhpur", "Mahabaleshwar", "Maharashtra", 
-      "Mumbai", "Nashik", "Pune", "Rajasthan", "Shirdi", "Udaipur"
-    ]
+      "Ahmedabad",
+      "Goa",
+      "Gujarat",
+      "Jodhpur",
+      "Mahabaleshwar",
+      "Maharashtra",
+      "Mumbai",
+      "Nashik",
+      "Pune",
+      "Rajasthan",
+      "Shirdi",
+      "Udaipur",
+    ],
   },
   {
     region: "North East",
     states: [
-      "Arunachal Pradesh", "Assam", "Gangtok", "Guwahati", "Manipur", 
-      "Meghalaya", "Pelling", "Shillong", "Sikkim", "Tawang"
-    ]
+      "Arunachal Pradesh",
+      "Assam",
+      "Gangtok",
+      "Guwahati",
+      "Manipur",
+      "Meghalaya",
+      "Pelling",
+      "Shillong",
+      "Sikkim",
+      "Tawang",
+    ],
   },
   {
     region: "Central India",
     states: [
-      "Bhopal", "Chhattisgarh", "Gwalior", "Indore", "Madhya Pradesh", 
-      "Pachmarhi", "Ujjain"
-    ]
+      "Bhopal",
+      "Chhattisgarh",
+      "Gwalior",
+      "Indore",
+      "Madhya Pradesh",
+      "Pachmarhi",
+      "Ujjain",
+    ],
   },
   {
     region: "Spiritual",
-    states: [
-      "Ayodhya", "kasi"
-    ]
-  }
+    states: ["Ayodhya", "kasi"],
+  },
 ];

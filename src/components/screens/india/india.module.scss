@@ -1,0 +1,23 @@
+@import '@/styles/scss/_variables.scss';
+@import '@/styles/scss/_mixins.scss';
+
+.indiaPage {
+  padding-bottom: 80px;
+}
+
+.mapContainer {
+  @include defaultBox;
+  margin-top: 40px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  border-radius: 12px;
+
+  /* Targeting the SVG to ensure responsiveness */
+  :global(.map svg) {
+    max-width: 100%;
+    height: auto;
+  }
+}
