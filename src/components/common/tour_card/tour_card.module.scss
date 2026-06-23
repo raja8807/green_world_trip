@@ -10,7 +10,7 @@
   margin-bottom: 20px;
 
   @include respond-below(lg) {
-    height: fit-content;
+    // height: fit-content;
   }
 
   &:hover {

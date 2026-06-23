@@ -1,25 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./searchBar.module.scss";
-
-import { CalendarRange, ChevronDown, GeoAlt } from "react-bootstrap-icons";
+import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabaseClient";
 
 const SearchBar = () => {
+  const router = useRouter();
   const [destination, setDestination] = useState("");
-  const [fromDate, setFromDate] = useState("2026-09-09");
-  const [toDate, setToDate] = useState("2026-10-10");
-  const [travellers, setTravellers] = useState("More");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [destinationsList, setDestinationsList] = useState([]);
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 350) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("top_destinations")
+          .select("title")
+          .order("title", { ascending: true });
+        
+        if (!error && data) {
+          setDestinationsList(data.map(d => d.title));
+        }
+      } catch (err) {
+        console.error("Failed to load destinations", err);
+      }
+    };
+    fetchDestinations();
+  }, []);
 
   const handleSearch = () => {
-    console.log({
-      destination,
-      fromDate,
-      toDate,
-      travellers,
-    });
+    if (destination.trim() !== "") {
+      router.push(`/search?q=${encodeURIComponent(destination.trim())}`);
+    } else {
+      router.push(`/search`);
+    }
   };
 
   return (
-    <div className={styles.searchBox} data-aos="fade-up">
+    <div className={`${styles.searchBox} ${isSticky ? styles.sticky : ""}`} data-aos="fade-up">
       {/* Destination */}
       <div className={styles.field}>
       
@@ -29,10 +60,17 @@ const SearchBar = () => {
 
           <input
             type="text"
+            list="destination-options"
             placeholder="Where are you going?"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
+          <datalist id="destination-options">
+            {destinationsList.map((dest, idx) => (
+              <option key={idx} value={dest} />
+            ))}
+          </datalist>
         </div>
       </div>
 
@@ -61,24 +99,6 @@ const SearchBar = () => {
         </div>
       </div>
 
-      {/* Advance */}
-      {/* <div className={styles.field}>
-        <div className={styles.info}>
-          <label>Advance</label>
-
-          <select
-            value={travellers}
-            onChange={(e) => setTravellers(e.target.value)}
-          >
-            <option>More</option>
-            <option>1 Traveller</option>
-            <option>2 Travellers</option>
-            <option>Family</option>
-          </select>
-
-          <ChevronDown className={styles.arrow} />
-        </div>
-      </div> */}
 
       {/* Button */}
       <button className={styles.searchBtn} onClick={handleSearch}>

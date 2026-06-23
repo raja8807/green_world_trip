@@ -52,12 +52,12 @@ export const PAGES = [
 ];
 
 export const POPULAR_DESTINATIONS = [
-  { name: "Your Reliable Ride" },
-  { name: "On Time Every Time" },
-  { name: "Travel in Style" },
-  { name: "City Transport" },
-  { name: "Business Transport" },
-  { name: "Online Booking" },
+  { name: "Kerala", href: "/domestic" },
+  { name: "Goa", href: "/domestic" },
+  { name: "Himachal Pradesh", href: "/domestic" },
+  { name: "Dubai", href: "/international" },
+  { name: "Singapore", href: "/international" },
+  { name: "Maldives", href: "/international" },
 ];
 
 export const BLOG_POSTS = [
@@ -180,30 +180,6 @@ export const LEADERSHIP_TEAM = [
     id: 4,
     name: "Charles Longton",
     role: "Sales Target",
-    image: "/assets/placeholder-avatar.jpg",
-  },
-  {
-    id: 5,
-    name: "Maria Morris",
-    role: "Tour Manager",
-    image: "/assets/placeholder-avatar.jpg",
-  },
-  {
-    id: 6,
-    name: "Tim Christopher",
-    role: "Designer",
-    image: "/assets/placeholder-avatar.jpg",
-  },
-  {
-    id: 7,
-    name: "Kelly Bell",
-    role: "HR Manager",
-    image: "/assets/placeholder-avatar.jpg",
-  },
-  {
-    id: 8,
-    name: "Marina Amanda",
-    role: "Lead Manager",
     image: "/assets/placeholder-avatar.jpg",
   },
 ];

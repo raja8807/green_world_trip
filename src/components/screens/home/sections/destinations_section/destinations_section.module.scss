@@ -32,6 +32,8 @@
   border-radius: 6px;
   height: 320px;
   cursor: pointer;
+  display: block;
+  text-decoration: none;
 
   &:hover {
     .image {

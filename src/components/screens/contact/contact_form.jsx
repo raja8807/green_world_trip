@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./contact.module.scss";
+import { supabase } from "@/lib/supabaseClient";
+import { Alert } from "react-bootstrap";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,28 +12,50 @@ const ContactForm = () => {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" });
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Enquiry Form Submitted:", formData);
-    alert("Thank you for your message! We will get back to you shortly.");
-    // Reset form after submission
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      
-      message: "",
-    });
+    setLoading(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const { error } = await supabase.from('contact_messages').insert([{
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+      }]);
+
+      if (error) throw error;
+
+      setStatus({ type: "success", message: "Thank you for your message! We will get back to you shortly." });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+      setTimeout(() => setStatus({ type: "", message: "" }), 5000);
+    } catch (err) {
+      setStatus({ type: "danger", message: "Failed to send message. Please try again." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className={styles.formCard} data-aos="fade-left" data-aos-delay="100">
       <h3>Send us a message</h3>
       <p>Fill out the form below and our team will get back to you within 24 hours.</p>
+      
+      {status.message && <Alert variant={status.type}>{status.message}</Alert>}
       
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
@@ -86,8 +110,8 @@ const ContactForm = () => {
           ></textarea>
         </div>
 
-        <button type="submit" className={styles.submitBtn}>
-          Send Message
+        <button type="submit" className={styles.submitBtn} disabled={loading}>
+          {loading ? 'Sending...' : 'Send Message'}
         </button>
       </form>
     </div>

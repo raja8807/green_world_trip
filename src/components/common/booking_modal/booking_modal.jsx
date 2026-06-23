@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, InputGroup, Alert } from 'react-bootstrap';
-import styles from './enquiry_modal.module.scss';
+import styles from './booking_modal.module.scss';
 import { CaretDownFill } from 'react-bootstrap-icons';
 import { supabase } from '@/lib/supabaseClient';
 
-const EnquiryModal = ({ show, setShow }) => {
+const BookingModal = ({ show, setShow, tour }) => {
     const [formData, setFormData] = useState({
-        name: '',
-        city: '',
+        customer_name: '',
         email: '',
         phone: '',
-        destination: '',
         travel_date: '',
-        people_count: '',
-        vacation_type: '',
+        guests: '',
+        special_requests: '',
     });
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
@@ -29,22 +27,22 @@ const EnquiryModal = ({ show, setShow }) => {
         setStatus({ type: '', message: '' });
 
         try {
-            const { error } = await supabase.from('enquiries').insert([{
-                name: formData.name,
-                city: formData.city,
+            const { error } = await supabase.from('bookings').insert([{
+                tour_id: tour?.id || null,
+                tour_name: tour?.name || 'Unknown Tour',
+                customer_name: formData.customer_name,
                 email: formData.email,
                 phone: formData.phone,
-                destination: formData.destination,
                 travel_date: formData.travel_date,
-                people_count: parseInt(formData.people_count),
-                vacation_type: formData.vacation_type,
+                guests: parseInt(formData.guests),
+                special_requests: formData.special_requests,
             }]);
 
             if (error) throw error;
 
-            setStatus({ type: 'success', message: 'Enquiry submitted successfully! We will contact you soon.' });
+            setStatus({ type: 'success', message: 'Booking request sent! We will confirm your details shortly.' });
             setFormData({
-                name: '', city: '', email: '', phone: '', destination: '', travel_date: '', people_count: '', vacation_type: ''
+                customer_name: '', email: '', phone: '', travel_date: '', guests: '', special_requests: ''
             });
             
             setTimeout(() => {
@@ -52,30 +50,32 @@ const EnquiryModal = ({ show, setShow }) => {
                 setStatus({ type: '', message: '' });
             }, 3000);
         } catch (error) {
-            setStatus({ type: 'danger', message: 'Failed to submit enquiry. Please try again later.' });
+            setStatus({ type: 'danger', message: 'Failed to send booking request. Please try again.' });
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <Modal show={show} onHide={() => setShow(false)} centered className={styles.enquiryModal} size="md">
+        <Modal show={show} onHide={() => setShow(false)} centered className={styles.bookingModal} size="md">
             <Modal.Header closeButton className={styles.modalHeader}>
-                <Modal.Title className={styles.modalTitle}>Enquire Now</Modal.Title>
+                <Modal.Title className={styles.modalTitle}>Book {tour?.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.modalBody}>
                 {status.message && <Alert variant={status.type}>{status.message}</Alert>}
                 <Form onSubmit={handleSubmit}>
+                    
                     <Form.Group className="mb-3">
-                        <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name *" required className={styles.formControl} />
+                        <Form.Label className="fw-semibold">Tour</Form.Label>
+                        <Form.Control type="text" readOnly disabled value={tour?.name || ''} className={styles.formControl} />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Control type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City of Residence *" required className={styles.formControl} />
+                        <Form.Control type="text" name="customer_name" value={formData.customer_name} onChange={handleChange} placeholder="Full Name *" required className={styles.formControl} />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email *" required className={styles.formControl} />
+                        <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address *" required className={styles.formControl} />
                     </Form.Group>
 
                     <InputGroup className={`mb-3 ${styles.phoneInputGroup}`}>
@@ -85,10 +85,6 @@ const EnquiryModal = ({ show, setShow }) => {
                         </InputGroup.Text>
                         <Form.Control type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number *" required className={styles.formControl} />
                     </InputGroup>
-
-                    <Form.Group className="mb-3">
-                        <Form.Control type="text" name="destination" value={formData.destination} onChange={handleChange} placeholder="Travel Destination *" required className={styles.formControl} />
-                    </Form.Group>
 
                     <Form.Group className="mb-3">
                         <Form.Control
@@ -107,10 +103,10 @@ const EnquiryModal = ({ show, setShow }) => {
                     <Form.Group className="mb-3">
                         <Form.Control 
                             type="number" 
-                            name="people_count"
-                            value={formData.people_count}
+                            name="guests"
+                            value={formData.guests}
                             onChange={handleChange}
-                            placeholder="No. of People *" 
+                            placeholder="No. of Guests *" 
                             min="1"
                             required 
                             className={styles.formControl} 
@@ -118,18 +114,19 @@ const EnquiryModal = ({ show, setShow }) => {
                     </Form.Group>
 
                     <Form.Group className="mb-4">
-                        <Form.Select required name="vacation_type" value={formData.vacation_type} onChange={handleChange} className={styles.formControl}>
-                            <option value="" disabled hidden>Vacation Type *</option>
-                            <option value="leisure">Leisure</option>
-                            <option value="business">Business</option>
-                            <option value="honeymoon">Honeymoon</option>
-                            <option value="family">Family</option>
-                            <option value="other">Other</option>
-                        </Form.Select>
+                        <Form.Control 
+                            as="textarea" 
+                            rows={3}
+                            name="special_requests"
+                            value={formData.special_requests}
+                            onChange={handleChange}
+                            placeholder="Special Requests (Optional)" 
+                            className={styles.formControl} 
+                        />
                     </Form.Group>
 
                     <Button type="submit" disabled={loading} className={styles.submitBtn}>
-                        {loading ? 'Submitting...' : 'Submit Enquiry'}
+                        {loading ? 'Processing...' : 'Request Booking'}
                     </Button>
                 </Form>
             </Modal.Body>
@@ -137,4 +134,4 @@ const EnquiryModal = ({ show, setShow }) => {
     );
 };
 
-export default EnquiryModal;
+export default BookingModal;

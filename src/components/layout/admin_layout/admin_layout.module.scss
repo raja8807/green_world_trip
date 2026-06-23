@@ -1,0 +1,91 @@
+@import '@/styles/scss/_variables.scss';
+
+.adminLayout {
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.sidebar {
+  background-color: #fff;
+  border-right: 1px solid #eaeaea;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 100vh;
+  z-index: 1050;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 767.98px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}
+
+.backdrop {
+  display: none;
+  @media (max-width: 767.98px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1040;
+  }
+}
+
+.sidebarSticky {
+  position: sticky;
+  top: 30px;
+}
+
+.sidebarTitle {
+  padding-left: 16px;
+  font-weight: 700;
+  color: $color_blue1;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: #333;
+  font-weight: 500;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  transition: background 0.2s;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgba(4, 168, 233, 0.05);
+    color: $color_blue1;
+  }
+}
+
+.active {
+  background-color: rgba(4, 168, 233, 0.1);
+  color: $color_blue1;
+  font-weight: 600;
+}
+
+.mainContent {
+  padding: 30px;
+
+  @media (max-width: 767.98px) {
+    padding: 20px;
+  }
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+}

@@ -1,12 +1,12 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import styles from "./team.module.scss";
 import { LEADERSHIP_TEAM } from "@/constants/constants";
 
 const Team = () => {
   return (
     <Container className={styles.teamSection}>
-      <h2 data-aos="fade-up">Leadership Team</h2>
+      <h2 data-aos="fade-up">Our Team</h2>
       <Row>
         {LEADERSHIP_TEAM.map((member, index) => (
           <Col lg={3} md={4} sm={6} xs={12} key={member.id}>
@@ -17,7 +17,7 @@ const Team = () => {
             >
               <div className={styles.avatar}>
                 {/* Using a generic placeholder for the avatar since the provided image is /assets/placeholder-avatar.jpg which might not exist */}
-                <img
+                <Image
                   src={`https://i.pravatar.cc/150?img=${member.id + 10}`}
                   alt={member.name}
                   onError={(e) => {

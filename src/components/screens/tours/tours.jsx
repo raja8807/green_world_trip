@@ -7,13 +7,13 @@ import { Filter, ArrowLeft } from 'react-bootstrap-icons';
 import { useRouter } from 'next/router';
 import CustomContainer from '@/components/ui/custom_container/custom_container';
 
-const ToursScreen = ({ tours, error, category }) => {
+const ToursScreen = ({ tours, error, category, initialSearchQuery = "" }) => {
   const router = useRouter();
   const [selectedDests, setSelectedDests] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedDurations, setSelectedDurations] = useState([]);
   const [showMobileFilter, setShowMobileFilter] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   
   // Format the title
   const formattedTitle = category 

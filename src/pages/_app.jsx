@@ -10,6 +10,7 @@ import Head from "next/head";
 
 import { ToastContainer } from "react-toastify";
 import Layout from "@/components/layout/layout";
+import AdminLayout from "@/components/layout/admin_layout/admin_layout";
 import { FONTS } from "@/styles/fonts";
 import LoadingScreen from "@/components/ui/loading_screen/loading_screen";
 
@@ -46,6 +47,7 @@ export default function App({ Component, pageProps }) {
 
   const router = useRouter();
   const isHome = router.pathname === "/";
+  const isAdmin = router.pathname.startsWith("/admin");
 
   return (
     <>
@@ -55,14 +57,18 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       <main className={FONTS.font1}>
-        
-        <Layout>
-          <Component {...pageProps} />
-          <ToastContainer position="bottom-right" />
-        </Layout>
-
+        {isAdmin ? (
+          <AdminLayout>
+            <Component {...pageProps} />
+            <ToastContainer position="bottom-right" />
+          </AdminLayout>
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+            <ToastContainer position="bottom-right" />
+          </Layout>
+        )}
       </main>
-
     </>
   );
 }

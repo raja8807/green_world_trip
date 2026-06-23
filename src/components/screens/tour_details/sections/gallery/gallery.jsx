@@ -29,7 +29,7 @@ const GallerySection = ({ images }) => {
   };
 
   return (
-    <div className={styles.gallerySection} data-aos="fade-up">
+    <div id="all-photos-section" className={styles.gallerySection} data-aos="fade-up">
       <h2 className={styles.sectionTitle}>Gallery</h2>
       <hr className={styles.divider} />
 

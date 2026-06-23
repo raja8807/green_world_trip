@@ -1,70 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./destinations_section.module.scss";
 import { Image } from "react-bootstrap";
-
-const destinations = [
-  {
-    id: 1,
-    title: "New York",
-    tours: "20 tours",
-    image: "/assets/newyork.jpg",
-    large: true,
-  },
-  {
-    id: 2,
-    title: "California",
-    tours: "20 tours",
-    image: "/assets/newyork.jpg",
-  },
-  {
-    id: 3,
-    title: "San Francisco",
-    tours: "20 tours",
-    image: "/assets/newyork.jpg",
-  },
-  {
-    id: 4,
-    title: "New Jersey",
-    tours: "20 tours",
-    image: "/assets/newyork.jpg",
-  },
-  {
-    id: 5,
-    title: "Nevada",
-    tours: "20 tours",
-    image: "/assets/newyork.jpg",
-  },
-];
+import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
 
 const DestinationsSection = () => {
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("top_destinations")
+          .select("*")
+          .order("sort_order", { ascending: true });
+
+        if (error) throw error;
+        setDestinations(data || []);
+      } catch (err) {
+        console.error("Error fetching top destinations:", err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDestinations();
+  }, []);
+
   return (
-    <section className={styles.DestinationsSection}>
+    <section className={styles.DestinationsSection} data-aos="fade-up">
       <div className={styles.container}>
         <h2>Top Destinations</h2>
 
         <div className={styles.grid}>
-          {destinations.map((item) => (
-            <div
-              key={item.id}
-              className={`${styles.card} ${
-                item.large ? styles.large : ""
-              }`}
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                className={styles.image}
-              />
+          {loading ? (
+             <p className="text-muted">Loading destinations...</p>
+          ) : (
+            destinations.map((item) => (
+              <Link
+                href={item.href}
+                key={item.id}
+                className={`${styles.card} ${
+                  item.is_large ? styles.large : ""
+                }`}
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  className={styles.image}
+                />
 
-              <div className={styles.overlay}></div>
+                <div className={styles.overlay}></div>
 
-              <div className={styles.content}>
-                <h3>{item.title}</h3>
+                <div className={styles.content}>
+                  <h3>{item.title}</h3>
 
-                <button>{item.tours}</button>
-              </div>
-            </div>
-          ))}
+                  <button>{item.tours_text}</button>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </section>

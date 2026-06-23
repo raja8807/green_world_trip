@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import styles from "./Footer.module.scss";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import {
 import { PAGES, POPULAR_DESTINATIONS } from "@/constants/constants";
 import { CONTACT_DETAILS } from "@/constants/conatct";
 import FONTS from "@/styles/fonts";
+import { supabase } from "@/lib/supabaseClient";
 
 const XIcon = () => (
   <svg
@@ -26,6 +27,28 @@ const XIcon = () => (
 );
 
 const Footer = () => {
+  const [destinations, setDestinations] = useState([]);
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("top_destinations")
+          .select("title, href")
+          .order("sort_order", { ascending: true })
+          .limit(6);
+
+        if (!error && data) {
+          setDestinations(data);
+        }
+      } catch (err) {
+        console.error("Error fetching destinations for footer:", err);
+      }
+    };
+
+    fetchDestinations();
+  }, []);
+
   return (
     <footer className={styles.footer}>
       <Container>
@@ -99,6 +122,16 @@ const Footer = () => {
             <h4 className={`${styles.widgetTitle} ${FONTS.font2}`}>
               Popular Destinations
             </h4>
+            <ul className={styles.linkList}>
+              {destinations.map((dest, index) => (
+                <li key={index}>
+                  <Link href={dest.href || "#"}>
+                    <CaretRightFill className={styles.bulletIcon} />{" "}
+                    {dest.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </Col>
 
           <Col lg={3} md={6} sm={12} className={styles.footerCol}>

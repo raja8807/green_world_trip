@@ -9,36 +9,7 @@ import { Slide } from "react-slideshow-image";
 
 import "react-slideshow-image/dist/styles.css";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Eva Hicks",
-    image: "/images/profile-1.jpg",
-    review:
-      "Faucibus tristique felis potenti ultrices ornare rhoncus semper hac facilisi Rutrum tellus lorem sem velit nisi non pharetra in dui.",
-  },
-  {
-    id: 2,
-    name: "Donald Wolf",
-    image: "/images/profile-2.jpg",
-    review:
-      "Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum.",
-  },
-  {
-    id: 3,
-    name: "Charlie Harrington",
-    image: "/images/profile-3.jpg",
-    review:
-      "Faucibus tristique felis potenti ultrices ornare rhoncus semper hac facilisi Rutrum tellus lorem sem velit nisi non pharetra in dui.",
-  },
-  {
-    id: 4,
-    name: "Sophia Carter",
-    image: "/images/profile-4.jpg",
-    review:
-      "Amazing experience and professional guides. Everything was organized perfectly.",
-  },
-];
+import { supabase } from "@/lib/supabaseClient";
 
 const chunkArray = (array, size) => {
   const result = [];
@@ -50,9 +21,32 @@ const chunkArray = (array, size) => {
   return result;
 };
 
-const groupedTestimonials = chunkArray(testimonials, 3);
-
 const TestimonialsSection = () => {
+  const [testimonials, setTestimonials] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("testimonials")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+        setTestimonials(data || []);
+      } catch (err) {
+        console.error("Error fetching testimonials:", err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  if (loading || testimonials.length === 0) return null;
+
   return (
     <section className={styles.TestimonialsSection}>
       <div className={styles.container}>
@@ -87,9 +81,10 @@ const TestimonialsSection = () => {
               <div className={styles.top}>
                 <div className={styles.user}>
                   <Image
-                    src={"/assets/avatar.png"}
+                    src={item.image || "/assets/avatar.png"}
                     alt={item.name}
                     roundedCircle
+                    style={{ width: '60px', height: '60px', objectFit: 'cover' }}
                   />
 
                   <div>
