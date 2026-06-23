@@ -51,8 +51,9 @@ const SearchBar = () => {
 
   return (
     <div className={`${styles.searchBox} ${isSticky ? styles.sticky : ""}`} data-aos="fade-up">
-      {/* Destination */}
-      <div className={styles.field}>
+      <div className={styles.innerWrapper}>
+        {/* Destination */}
+        <div className={styles.field}>
       
 
         <div className={styles.info}>
@@ -100,10 +101,11 @@ const SearchBar = () => {
       </div>
 
 
-      {/* Button */}
-      <button className={styles.searchBtn} onClick={handleSearch}>
-        SEARCH
-      </button>
+        {/* Button */}
+        <button className={styles.searchBtn} onClick={handleSearch}>
+          SEARCH
+        </button>
+      </div>
     </div>
   );
 };

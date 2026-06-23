@@ -2,7 +2,7 @@
   width: 100%;
   background: #fff;
   border-radius: 12px;
-  display: flex;
+  display: block; /* changed from flex */
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   max-width: 1000px;
@@ -10,46 +10,34 @@
 
   @media (max-width: 900px) {
     width: 90%;
+  }
+}
+
+.innerWrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 900px) {
     flex-direction: column;
   }
 }
 
 .sticky {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  max-width: 100% !important;
-  border-radius: 0 !important;
-  z-index: 1050;
-  margin: 0 !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  animation: slideDown 0.3s ease-out;
-  transform: none !important; /* override aos */
-
-  @media (max-width: 900px) {
-    flex-direction: row; // Keep it single line when sticky even on mobile to save space
-    height: 70px;
-    padding: 0 10px;
-
-    .field {
-      padding: 5px;
-      border: none;
-
-      label {
-        display: none;
-      } /* hide labels to save space */
-      input {
-        font-size: 14px;
-      }
-    }
-
-    .searchBtn {
-      min-width: 80px;
-      min-height: 40px;
-      margin-left: 10px;
-      border-radius: 6px;
-    }
+  @media (min-width: 901px) {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    max-width: 100% !important; /* Full width background */
+    border-radius: 0 !important;
+    z-index: 1050;
+    margin: 0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.3s ease-out;
+    transform: none !important; /* override aos */
   }
 }
 
