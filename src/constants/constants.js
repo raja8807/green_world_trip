@@ -264,6 +264,7 @@ export const DOMESTIC_REGIONS = [
       "Kanyakumari",
       "Karnataka",
       "Kerala",
+      "Kodaikanal",
       "Kochi",
       "Madurai",
       "Munnar",
