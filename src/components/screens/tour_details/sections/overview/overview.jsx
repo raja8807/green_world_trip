@@ -96,6 +96,7 @@ const OverviewSection = ({ tour, reviews }) => {
             </div>
           </div>
 
+          {/* 
           <div className={styles.infoBox}>
             <Translate className={styles.icon} />
             <div>
@@ -103,6 +104,7 @@ const OverviewSection = ({ tour, reviews }) => {
               <span className={styles.value}>English, Espanol</span>
             </div>
           </div>
+          */}
         </div>
 
         <hr className={styles.divider} />

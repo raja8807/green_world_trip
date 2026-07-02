@@ -44,7 +44,7 @@ export const PAGES = [
   },
   {
     title: "Group Tours",
-    href: "/group-tours",
+    href: "/group",
   },
 
   { title: "India", href: "/india" },

@@ -565,6 +565,7 @@ const TourForm = ({ initialData }) => {
                     <option value="domestic">Domestic</option>
                     <option value="international">International</option>
                     <option value="honeymoon">Honey Moon</option>
+                    <option value="group">Group Tour</option>
                   </Form.Select>
                 </Col>
               </Form.Group>
@@ -841,6 +842,53 @@ const TourForm = ({ initialData }) => {
                   <Form.Group as={Row} className="mb-4 align-items-center">
                     <Form.Label column sm={3}>
                       Honeymoon Type
+                    </Form.Label>
+                    <Col sm={9}>
+                      <Form.Select
+                        name="region_continent"
+                        value={formData.region_continent}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select Type...</option>
+                        <option value={"International"}>International</option>
+                        <option value={"Domestic"}>Domestic</option>
+                      </Form.Select>
+                    </Col>
+                  </Form.Group>
+                  <Form.Group as={Row} className="mb-4 align-items-center">
+                    <Form.Label column sm={3}>
+                      Destination
+                    </Form.Label>
+                    <Col sm={9}>
+                      <Form.Select
+                        name="location"
+                        value={formData.location}
+                        onChange={handleChange}
+                        disabled={!formData.region_continent}
+                      >
+                        <option value="">Select Destination...</option>
+                        {formData.region_continent &&
+                          (formData.region_continent === "International"
+                            ? allCountries.map((dest) => (
+                                <option key={dest.name} value={dest.name}>
+                                  {dest.name}
+                                </option>
+                              ))
+                            : indianStates.map((dest) => (
+                                <option key={dest.name} value={dest.name}>
+                                  {dest.name}
+                                </option>
+                              )))}
+                      </Form.Select>
+                    </Col>
+                  </Form.Group>
+                </>
+              )}
+              {formData.category_type === "group" && (
+                <>
+                  <Form.Group as={Row} className="mb-4 align-items-center">
+                    <Form.Label column sm={3}>
+                      Tour Type
                     </Form.Label>
                     <Col sm={9}>
                       <Form.Select

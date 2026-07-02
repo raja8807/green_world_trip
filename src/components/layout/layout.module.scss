@@ -15,21 +15,48 @@
     width: fit-content;
   }
 
+  .mobileFloatingMenu {
+    display: none;
+  }
+
   @include respond-below(md) {
     .enquireButton {
-      // bottom: 10px;
-      // right: 0px;
-
-      b {
-        display: none;
-      }
+      display: none !important;
     }
 
-    // .WhatsappButton {
+    .WhatsappButton {
+      display: none !important;
+    }
 
-    //     bottom: 10px;
-    //     right: 0px;
+    .mobileFloatingMenu {
+      display: flex;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(34, 34, 34, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 40px;
+      padding: 12px 24px;
+      gap: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
-    // }
+      a {
+        color: #e1dfdf;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+          color: #73b63b;
+          transform: translateY(-2px);
+        }
+      }
+    }
   }
 }

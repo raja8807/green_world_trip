@@ -22,22 +22,28 @@ const IndiaScreen = () => {
         description="Select a state to explore domestic tours and packages"
       />
       <CustomContainer>
-        <div className={styles.mapContainer} data-aos="fade-up">
-          <IndiaMap
-            type="select-single"
-            size={600}
-            mapColor="#e4e6ef"
-            strokeColor="#ffffff"
-            strokeWidth={1}
-            hoverColor="#73b63b"
-            selectColor="#73b63b"
-            hints={true}
-            hintTextColor="#ffffff"
-            hintBackgroundColor="#73b63b"
-            hintPadding="8px 12px"
-            hintBorderRadius={4}
-            onSelect={handleStateSelect}
-          />
+        <div className={styles.mapWrapper}>
+          <div className={styles.mapIntro} data-aos="fade-down">
+            <h2>Interactive Map</h2>
+            <p>Hover over the map and click on any state to view our exclusive domestic tour packages tailored just for you.</p>
+          </div>
+          <div className={styles.mapContainer} data-aos="zoom-in" data-aos-delay="200">
+            <IndiaMap
+              type="select-single"
+              size={700}
+              mapColor="#222222"
+              strokeColor="#121212"
+              strokeWidth={1.5}
+              hoverColor="#73b63b"
+              selectColor="#04a8e9"
+              hints={true}
+              hintTextColor="#121212"
+              hintBackgroundColor="#e1dfdf"
+              hintPadding="12px 18px"
+              hintBorderRadius={8}
+              onSelect={handleStateSelect}
+            />
+          </div>
         </div>
       </CustomContainer>
     </div>

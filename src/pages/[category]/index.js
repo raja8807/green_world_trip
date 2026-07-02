@@ -18,7 +18,8 @@ export async function getServerSideProps({ params }) {
   if (
     category !== "domestic" &&
     category !== "international" &&
-    category !== "honeymoon"
+    category !== "honeymoon" &&
+    category !== "group"
   ) {
     return {
       notFound: true,

@@ -32,9 +32,11 @@ const TourDetailsScreen = ({ tour, itineraries, faqs, reviews }) => {
                 <ItinerarySection itineraries={itineraries} />
               )}
               
+              {/* 
               {(tour.included?.length > 0 || tour.excluded?.length > 0) && (
                 <IncludedExcludedSection included={tour.included} excluded={tour.excluded} />
               )}
+              */}
               
               {faqs && faqs.length > 0 && (
                 <FaqsSection faqs={faqs} />

@@ -3,21 +3,74 @@
 
 .indiaPage {
   padding-bottom: 80px;
+  background-color: $color_b1;
+  min-height: 100vh;
+}
+
+.mapWrapper {
+  position: relative;
+  margin-top: -60px; /* Pull up over the banner slightly */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.mapIntro {
+  text-align: center;
+  padding: 30px;
+  background: rgba($color_b2, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba($color_text_grey2, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+
+  h2 {
+    color: $color_text_grey2;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $color_text_grey;
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }
 
 .mapContainer {
-  @include defaultBox;
-  margin-top: 40px;
-  padding: 40px;
+  background: linear-gradient(145deg, $color_b2, $color_b3);
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 500px;
-  border-radius: 12px;
+  min-height: 600px;
+  width: 100%;
+  border-radius: 24px;
+  border: 1px solid rgba($color_text_grey2, 0.05);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba($color_text_grey2, 0.1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 40px 80px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba($color_green1, 0.1),
+      inset 0 1px 0 rgba($color_text_grey2, 0.2);
+  }
 
   /* Targeting the SVG to ensure responsiveness */
   :global(.map svg) {
     max-width: 100%;
     height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+    transition: filter 0.3s ease;
   }
 }
