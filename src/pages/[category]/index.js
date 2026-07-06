@@ -1,13 +1,18 @@
 import React from "react";
 import CategoryRegionsScreen from "@/components/screens/tours/category_regions/category_regions";
 import { supabase } from "@/lib/supabaseClient";
+import SEO from "@/components/common/seo/seo";
 
 export default function CategoryLandingPage({ groupedRegions, category }) {
+  const displayCategory = category ? category.charAt(0).toUpperCase() + category.slice(1) : "Tours";
   return (
-    <CategoryRegionsScreen
-      groupedRegions={groupedRegions}
-      category={category}
-    />
+    <>
+      <SEO title={`${displayCategory} Tours`} description={`Browse our best ${category} tour packages and destinations.`} />
+      <CategoryRegionsScreen
+        groupedRegions={groupedRegions}
+        category={category}
+      />
+    </>
   );
 }
 

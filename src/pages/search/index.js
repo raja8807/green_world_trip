@@ -1,6 +1,7 @@
 import React from "react";
 import { supabase } from "@/lib/supabaseClient";
 import ToursScreen from "@/components/screens/tours/tours";
+import SEO from "@/components/common/seo/seo";
 
 export default function SearchResultsPage({
   tours,
@@ -8,12 +9,15 @@ export default function SearchResultsPage({
   searchQuery,
 }) {
   return (
-    <ToursScreen 
-      tours={tours} 
-      error={error} 
-      category="Search Results" 
-      initialSearchQuery={searchQuery} 
-    />
+    <>
+      <SEO title={`Search Results for "${searchQuery}"`} description={`Find the best tour packages matching "${searchQuery}" with Green World Trip.`} />
+      <ToursScreen 
+        tours={tours} 
+        error={error} 
+        category="Search Results" 
+        initialSearchQuery={searchQuery} 
+      />
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { supabase } from "@/lib/supabaseClient";
 import ToursScreen from "@/components/screens/tours/tours";
+import SEO from "@/components/common/seo/seo";
 
 export default function DestinationToursPage({
   tours,
@@ -9,9 +10,12 @@ export default function DestinationToursPage({
   category,
 }) {
   // Format the destination name for display
-  const formattedDestination = destination.replace(/-/g, " ");
+  const formattedDestination = destination.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   return (
-    <ToursScreen tours={tours} error={error} category={formattedDestination} />
+    <>
+      <SEO title={`${formattedDestination} Tours`} description={`Find the best ${formattedDestination} packages for your next trip.`} />
+      <ToursScreen tours={tours} error={error} category={formattedDestination} />
+    </>
   );
 }
 

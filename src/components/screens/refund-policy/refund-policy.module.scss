@@ -1,0 +1,50 @@
+.policySection {
+  padding: 80px 0;
+  background-color: #ffffff;
+}
+
+.contentWrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  color: $color_b3;
+  line-height: 1.8;
+  font-size: 16px;
+
+  .pageTitle {
+    margin-bottom: 40px;
+    color: $color_b1;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    color: $color_b2;
+    font-weight: 700;
+  }
+
+  h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: $color_b1;
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+
+  .italicText {
+    margin-top: 30px;
+    font-style: italic;
+  }
+}

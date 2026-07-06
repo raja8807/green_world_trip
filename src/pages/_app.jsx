@@ -13,6 +13,7 @@ import Layout from "@/components/layout/layout";
 import AdminLayout from "@/components/layout/admin_layout/admin_layout";
 import { FONTS } from "@/styles/fonts";
 import LoadingScreen from "@/components/ui/loading_screen/loading_screen";
+import SEO from "@/components/common/seo/seo";
 
 
 export default function App({ Component, pageProps }) {
@@ -53,8 +54,8 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Green World Trip | Home</title>
       </Head>
+      <SEO />
 
       <main className={FONTS.font1}>
         {isAdmin ? (

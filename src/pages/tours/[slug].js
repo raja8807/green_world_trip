@@ -1,6 +1,7 @@
 import React from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import TourDetailsScreen from '@/components/screens/tour_details/tour_details';
+import SEO from "@/components/common/seo/seo";
 
 export default function TourPage({ tour, itineraries, faqs, reviews, error }) {
   if (error || !tour) {
@@ -13,12 +14,15 @@ export default function TourPage({ tour, itineraries, faqs, reviews, error }) {
   }
 
   return (
-    <TourDetailsScreen 
-      tour={tour} 
-      itineraries={itineraries} 
-      faqs={faqs} 
-      reviews={reviews} 
-    />
+    <>
+      <SEO title={tour.title} description={`Book the ${tour.title} package with Green World Trip.`} />
+      <TourDetailsScreen 
+        tour={tour} 
+        itineraries={itineraries} 
+        faqs={faqs} 
+        reviews={reviews} 
+      />
+    </>
   );
 }
 

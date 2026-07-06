@@ -162,6 +162,22 @@ const Footer = () => {
             </ul>
           </Col>
         </Row>
+        <div className={styles.bottomBar}>
+          <p className={styles.copyright}>
+            &copy; {new Date().getFullYear()} Tourizta. All rights reserved.
+          </p>
+          <ul className={styles.policyLinks}>
+            <li>
+              <Link href="/terms-and-conditions">Terms & Conditions</Link>
+            </li>
+            <li>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link href="/refund-policy">Refund Policy</Link>
+            </li>
+          </ul>
+        </div>
       </Container>
     </footer>
   );
