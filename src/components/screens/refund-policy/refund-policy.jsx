@@ -32,7 +32,7 @@ const RefundPolicyScreen = () => {
               Certain services and bookings are strictly non-refundable regardless of the cancellation timeframe. These include:
             </p>
             <ul>
-              <li>Flight tickets (subject to the specific airline's policy).</li>
+              <li>Flight tickets (subject to the specific airlin&apos;s policy).</li>
               <li>Visa processing fees and government taxes.</li>
               <li>Special promotional packages or discounted deals marked as non-refundable.</li>
               <li>Travel insurance premiums.</li>
