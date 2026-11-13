@@ -50,6 +50,12 @@ export default function App({ Component, pageProps }) {
   const isHome = router.pathname === "/";
   const isAdmin = router.pathname.startsWith("/admin");
 
+  const isUnderConstruction = true
+
+  if(isUnderConstruction){
+    return <p>Under Construction</p>
+  }
+
   return (
     <>
       <Head>
