@@ -10,6 +10,7 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 import { supabase } from "@/lib/supabaseClient";
+import { getImageUrl } from "@/utils/image";
 
 const chunkArray = (array, size) => {
   const result = [];
@@ -81,7 +82,7 @@ const TestimonialsSection = () => {
               <div className={styles.top}>
                 <div className={styles.user}>
                   <Image
-                    src={item.image || "/assets/avatar.png"}
+                    src={getImageUrl(item.image) || "/assets/avatar.png"}
                     alt={item.name}
                     roundedCircle
                     style={{ width: '60px', height: '60px', objectFit: 'cover' }}

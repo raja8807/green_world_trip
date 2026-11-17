@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { getImageUrl } from "@/utils/image";
 
 const SEO = ({ title, description, keywords, image, url }) => {
   const siteTitle = "Green World Trip";
@@ -10,7 +11,7 @@ const SEO = ({ title, description, keywords, image, url }) => {
   const metaTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const metaDescription = description || defaultDescription;
   const metaKeywords = keywords || defaultKeywords;
-  const metaImage = image || defaultImage;
+  const metaImage = image ? getImageUrl(image) : defaultImage;
   const metaUrl = url || defaultUrl;
 
   return (

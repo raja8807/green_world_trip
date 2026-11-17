@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Accordion } from 'react-bootstrap';
 import styles from './itinerary.module.scss';
+import { getImageUrl } from '@/utils/image';
 
 const ItinerarySection = ({ itineraries }) => {
   const [expandAll, setExpandAll] = useState(false);
@@ -24,7 +25,7 @@ const ItinerarySection = ({ itineraries }) => {
               <div className={styles.bodyContent}>
                 {item.images && item.images.length > 0 && (
                   <div className={styles.imageWrapper}>
-                    <img src={item.images[0]} alt="Itinerary stop" />
+                    <img src={getImageUrl(item.images[0])} alt="Itinerary stop" />
                   </div>
                 )}
                 <div className={styles.textWrapper}>

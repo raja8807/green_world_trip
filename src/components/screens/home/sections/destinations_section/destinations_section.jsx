@@ -3,6 +3,7 @@ import styles from "./destinations_section.module.scss";
 import { Image } from "react-bootstrap";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { getImageUrl } from "@/utils/image";
 
 const DestinationsSection = () => {
   const [destinations, setDestinations] = useState([]);
@@ -46,7 +47,7 @@ const DestinationsSection = () => {
                 }`}
               >
                 <Image
-                  src={item.image}
+                  src={getImageUrl(item.image)}
                   alt={item.title}
                   className={styles.image}
                 />

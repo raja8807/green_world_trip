@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { X, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import styles from './gallery.module.scss';
+import { getImageUrl } from '@/utils/image';
 
 const GallerySection = ({ images }) => {
   const [showModal, setShowModal] = useState(false);
@@ -36,7 +37,7 @@ const GallerySection = ({ images }) => {
       <div className={styles.imageGrid}>
         {images.map((img, index) => (
           <div key={index} className={styles.imageWrapper} onClick={() => handleImageClick(index)}>
-            <img src={img} alt={`Gallery Image ${index + 1}`} className={styles.image} />
+            <img src={getImageUrl(img)} alt={`Gallery Image ${index + 1}`} className={styles.image} />
           </div>
         ))}
       </div>
@@ -51,7 +52,7 @@ const GallerySection = ({ images }) => {
             <ChevronLeft size={32} />
           </button>
 
-          <img src={images[selectedIndex]} alt="Full Screen" className={styles.fullImage} />
+          <img src={getImageUrl(images[selectedIndex])} alt="Full Screen" className={styles.fullImage} />
           
           <button className={styles.navBtnNext} onClick={handleNext} aria-label="Next">
             <ChevronRight size={32} />

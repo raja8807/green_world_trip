@@ -14,6 +14,7 @@ import AdminLayout from "@/components/layout/admin_layout/admin_layout";
 import { FONTS } from "@/styles/fonts";
 import LoadingScreen from "@/components/ui/loading_screen/loading_screen";
 import SEO from "@/components/common/seo/seo";
+import UnderConstruction from "@/components/common/under_construction/under_construction";
 
 
 export default function App({ Component, pageProps }) {
@@ -50,10 +51,10 @@ export default function App({ Component, pageProps }) {
   const isHome = router.pathname === "/";
   const isAdmin = router.pathname.startsWith("/admin");
 
-  const isUnderConstruction = true
+  const isUnderConstruction = true;
 
-  if(isUnderConstruction){
-    return <p>Under Construction</p>
+  if (process.env.NEXT_PUBLIC_ENV !== "DEV" && isUnderConstruction && !isAdmin) {
+    return <UnderConstruction />;
   }
 
   return (

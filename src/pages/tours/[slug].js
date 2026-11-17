@@ -15,7 +15,11 @@ export default function TourPage({ tour, itineraries, faqs, reviews, error }) {
 
   return (
     <>
-      <SEO title={tour.title} description={`Book the ${tour.title} package with Green World Trip.`} />
+      <SEO 
+        title={tour.name || tour.title} 
+        description={`Book the ${tour.name || tour.title} package with Green World Trip.`} 
+        image={tour.main_image} 
+      />
       <TourDetailsScreen 
         tour={tour} 
         itineraries={itineraries} 

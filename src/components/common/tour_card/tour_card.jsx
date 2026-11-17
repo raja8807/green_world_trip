@@ -10,12 +10,16 @@ import {
   LightningChargeFill,
 } from "react-bootstrap-icons";
 import Link from "next/link";
+import { getImageUrl } from "@/utils/image";
 
 const TourCard = ({ tour }) => {
   const [liked, setLiked] = useState(false);
 
   // Safely extract the image url
-  const imageUrl = tour.main_image || "/tour.png";
+  const imageUrl = getImageUrl(tour.main_image) || "/tour.png";
+
+  
+  
 
   return (
     <Link href={`/tours/${tour.slug}`}>

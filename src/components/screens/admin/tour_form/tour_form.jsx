@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { Country, State } from "country-state-city";
 import styles from "./tour_form.module.scss";
 import CustomContainer from "@/components/ui/custom_container/custom_container";
+import { getImageUrl } from "@/utils/image";
 
 const CONTINENTS = [
   "Asia",
@@ -659,7 +660,7 @@ const TourForm = ({ initialData }) => {
                   {formData.main_image && (
                     <div className="mt-2">
                       <img
-                        src={formData.main_image}
+                        src={getImageUrl(formData.main_image)}
                         alt="Preview"
                         style={{
                           height: "100px",
@@ -698,7 +699,7 @@ const TourForm = ({ initialData }) => {
                       {formData.images.map((imgUrl, idx) => (
                         <div key={idx} style={{ position: "relative" }}>
                           <img
-                            src={imgUrl}
+                            src={getImageUrl(imgUrl)}
                             alt="Gallery"
                             style={{
                               height: "100px",
@@ -1068,7 +1069,7 @@ const TourForm = ({ initialData }) => {
                           {it.images.map((imgUrl, imgIdx) => (
                             <div key={imgIdx} style={{ position: "relative" }}>
                               <img
-                                src={imgUrl}
+                                src={getImageUrl(imgUrl)}
                                 alt="Itinerary"
                                 style={{
                                   height: "60px",

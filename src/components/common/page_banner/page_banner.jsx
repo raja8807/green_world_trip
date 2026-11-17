@@ -5,6 +5,7 @@ import { ChevronRight, HouseFill } from "react-bootstrap-icons";
 import FONTS from "@/styles/fonts";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
+import { getImageUrl } from "@/utils/image";
 
 const PageBanner = ({ title, image, videoSrc, customCrumbs }) => {
     const router = useRouter();
@@ -31,7 +32,7 @@ const PageBanner = ({ title, image, videoSrc, customCrumbs }) => {
     return (
         <section className={styles.PageBanner}
             style={{
-                backgroundImage: videoSrc ? 'none' : `url('${image}')`
+                backgroundImage: videoSrc ? 'none' : (image ? `url('${getImageUrl(image)}')` : 'none')
             }}
         >
             {videoSrc && (

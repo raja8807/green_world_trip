@@ -4,6 +4,7 @@ import { Row, Col, Image } from "react-bootstrap";
 import styles from "./tour_categories.module.scss";
 import { TOUR_CATEGORIES } from "@/constants/constants";
 import Link from "next/link";
+import { getImageUrl } from "@/utils/image";
 
 const TourCategories = () => {
   return (
@@ -18,7 +19,7 @@ const TourCategories = () => {
                   data-aos="fade-up"
                   data-aos-delay={category.delay}
                 >
-                  <Image src={category.image} alt={category.title} />
+                  <Image src={getImageUrl(category.image)} alt={category.title} />
                   <div className={styles.overlay}></div>
                   <div className={styles.content}>
                     <div className={styles.subtitle}>{category.subtitle}</div>

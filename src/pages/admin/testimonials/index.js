@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/lib/supabaseClient';
 import Link from 'next/link';
 import { Trash, PencilSquare, Plus } from 'react-bootstrap-icons';
+import { getImageUrl } from '@/utils/image';
 
 export default function AdminTestimonialsPage({ initialTestimonials, error }) {
   const router = useRouter();
@@ -56,7 +57,7 @@ export default function AdminTestimonialsPage({ initialTestimonials, error }) {
                   <td>
                     {item.image ? (
                       <img 
-                        src={item.image} 
+                        src={getImageUrl(item.image)} 
                         alt={item.name} 
                         style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '50%' }} 
                       />

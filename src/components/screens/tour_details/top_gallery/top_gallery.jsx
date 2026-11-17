@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './top_gallery.module.scss';
 import { Grid3x3GapFill } from 'react-bootstrap-icons';
 import CustomContainer from '@/components/ui/custom_container/custom_container';
+import { getImageUrl } from '@/utils/image';
 
 const TopGallery = ({ mainImage, images }) => {
   const handleScrollToGallery = () => {
@@ -22,7 +23,7 @@ const TopGallery = ({ mainImage, images }) => {
             {/* Main large image */}
             <div 
               className={styles.mainImage} 
-              style={{ backgroundImage: `url(${mainImage || '/tour.png'})` }}
+              style={{ backgroundImage: `url(${getImageUrl(mainImage) || '/tour.png'})` }}
               onClick={handleScrollToGallery}
             ></div>
 
