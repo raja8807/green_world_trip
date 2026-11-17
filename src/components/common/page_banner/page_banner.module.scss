@@ -22,60 +22,75 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    // background: linear-gradient(135deg, rgba(169, 26, 31, 0.4) 0%, rgba(11, 11, 11, 0.8) 100%);
+    background: linear-gradient(180deg, rgba(14, 51, 36, 0.6) 0%, rgba(10, 26, 18, 0.85) 100%);
     z-index: 1;
   }
 
   .cont {
-    height: 450px;
+    height: 380px;
     position: relative;
     z-index: 2;
     @include flexCenter;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
 
     h1 {
-      color: white;
-      font-size: 56px;
+      color: #ffffff;
+      font-size: 52px;
       font-weight: 700;
       text-align: center;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin: 0;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 
-      @media (max-width: 576px) {
-        font-size: 36px;
+      @media (max-width: 768px) {
+        font-size: 34px;
       }
     }
 
     .crumbs {
-      display: flex;
+      display: inline-flex;
       gap: 10px;
       align-items: center;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 8px 22px;
       border-radius: 50px;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
 
       svg {
-        font-size: 14px;
-        color: #e9021e;
+        font-size: 12px;
+        color: $accent-gold;
       }
 
-      a,
-      span {
-        color: white;
-        font-size: 14px;
+      a {
+        color: #ffffff;
+        font-size: 13.5px;
         font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.2s ease;
 
         &:hover {
-          color: #e9021e;
+          color: $accent-gold;
         }
       }
 
       span {
-        color: #ffffffa6;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13.5px;
+        font-weight: 500;
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cont {
+      height: 280px;
     }
   }
 }

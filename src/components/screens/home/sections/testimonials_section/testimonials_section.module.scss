@@ -1,70 +1,69 @@
 .TestimonialsSection {
   width: 100%;
-  padding: 90px 0;
-  background: #fff;
+  padding: 80px 0;
+  background-color: #ffffff;
+  border-top: 1px solid rgba(23, 75, 54, 0.05);
 
   :global {
     .react-slideshow-container + ul.indicators {
-      margin-top: 40px;
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
     }
 
     .react-slideshow-container + ul.indicators li {
-      margin: 0 6px;
+      margin: 0;
     }
 
-    .react-slideshow-container + ul.indicators li div {
-      width: 12px;
-      height: 12px;
+    .react-slideshow-container + ul.indicators li button {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: #d9d9d9;
+      background: rgba(23, 75, 54, 0.15);
+      border: none;
+      transition: all 0.3s ease;
+      padding: 0;
     }
 
-    .react-slideshow-container + ul.indicators li.active div {
-      background: #4f87ff;
+    .react-slideshow-container + ul.indicators li.active button {
+      background: $primary-green;
+      width: 24px;
+      border-radius: 10px;
     }
   }
 }
 
-.container {
-  width: 100%;
-  max-width: 1320px;
-  margin: auto;
-  padding: 0 20px;
-
-  h2 {
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
+.sliderContainer {
+  margin-top: 10px;
 }
 
-.sliderGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 35px;
-
-  @media (max-width: 992px) {
-    grid-template-columns: 1fr;
-  }
+.slideItem {
+  padding: 10px 14px;
 }
 
 .card {
-  border: 1px solid #e5e7eb;
-  padding: 38px;
-  border-radius: 4px;
-  background: #fff;
-  min-height: 250px;
+  border: 1px solid $border-soft;
+  padding: 34px 30px;
+  border-radius: 18px;
+  background: $bg-cream;
+  min-height: 240px;
+  box-shadow: 0 8px 24px rgba(23, 75, 54, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  margin-bottom: 10px;
-  @media (max-width: 768px) {
-    padding: 24px;
-    min-height: auto;
+  &:hover {
+    background: #ffffff;
+    box-shadow: 0 14px 35px rgba(23, 75, 54, 0.08);
+    transform: translateY(-4px);
+    border-color: rgba(217, 183, 121, 0.4);
   }
 
-  p {
-    margin-top: 20px;
-    font-size: 15px;
-    line-height: 1.8;
-    color: #73809a;
+  @include respond-below(md) {
+    padding: 24px 20px;
   }
 }
 
@@ -72,29 +71,28 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .user {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
 
-  img {
-    width: 60px;
-    height: 60px;
+  .avatar {
+    width: 56px;
+    height: 56px;
     object-fit: cover;
+    border: 2px solid $accent-gold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   h3 {
-    font-size: 20px;
-    font-weight: 500;
-    color: #222;
-    margin-bottom: 12px;
-  }
-
-  p {
-    font-size: 14px;
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-charcoal;
+    margin: 0 0 6px 0;
   }
 }
 
@@ -102,21 +100,28 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #ffcc00;
+  color: $accent-gold;
 
   svg {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
 .quote {
-  font-size: 48px;
-  color: #4f87ff;
-  min-width: 48px;
+  font-size: 42px;
+  color: rgba(217, 183, 121, 0.35);
+  min-width: 42px;
+  margin-top: -6px;
 
-  @media (max-width: 768px) {
-    font-size: 38px;
+  @include respond-below(md) {
+    font-size: 32px;
   }
 }
 
-/* react-slideshow-image custom */
+.reviewText {
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: #49544e;
+  font-style: italic;
+  margin: 0;
+}

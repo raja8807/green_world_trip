@@ -57,12 +57,11 @@ const Footer = () => {
             <div className={styles.logoSection}>
               <Image
                 src="/logo/logo.png"
-                alt="TOURIZA Logo"
+                alt="Green World Trip Logo"
                 className={styles.logoImage}
               />
               <p className={styles.description}>
-                We take care of every detail you can travel with confidence
-                ease.
+                Crafting extraordinary journeys and luxury travel memories across India and the world with bespoke care and unmatched local expertise.
               </p>
               {/* 
               <div className={styles.contactInfo}>
@@ -164,7 +163,7 @@ const Footer = () => {
         </Row>
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>
-            &copy; {new Date().getFullYear()} Tourizta. All rights reserved.
+            &copy; {new Date().getFullYear()} Green World Trip. All rights reserved.
           </p>
           <ul className={styles.policyLinks}>
             <li>

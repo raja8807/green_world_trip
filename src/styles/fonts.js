@@ -1,35 +1,24 @@
-import { Manrope as Font1 } from "next/font/google";
-import { Oxanium as Font2 } from "next/font/google";
-// import localFont from "next/font/local";
+import { Plus_Jakarta_Sans as BodyFont, Playfair_Display as HeadingFont } from "next/font/google";
 
-const font1 = Font1({
-  weight: ["400"],
+const bodyFont = BodyFont({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-primary",
-});
-const font2 = Font2({
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-  subsets: ["latin"],
-  variable: "--font-primary",
+  display: "swap",
+  variable: "--font-body",
 });
 
-// const sunsive = localFont({
-//   src: [
-//     {
-//       path: "../../public/fonts/sunsive-medium.woff",
-//       weight: "500",
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-sunsive",
-// });
+const headingFont = HeadingFont({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
+});
 
 export const FONTS = {
-  font1: font1.className,
-  font2: font2.className,
-  // font2: sunsive.className,
+  font1: bodyFont.className,
+  font2: headingFont.className,
 };
 
-// export const FONT_VARIABLES = `${font1.variable} ${sunsive.variable}`;
+export const FONT_VARIABLES = `${bodyFont.variable} ${headingFont.variable}`;
 
 export default FONTS;

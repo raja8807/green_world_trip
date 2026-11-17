@@ -1,58 +1,82 @@
 .TopHeader {
-  background-color: $color_green1;
+  background-color: $primary-forest;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
   .wrap {
     display: flex;
     justify-content: space-between;
-    height: 50px;
+    height: 42px;
     align-items: center;
 
     .left {
       display: flex;
+      align-items: center;
+
       a {
-        color: white;
-        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 13px;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
         &:hover {
-          text-decoration: underline;
+          color: $accent-gold;
         }
       }
 
       .soc {
         display: flex;
-        gap: 12px;
+        gap: 14px;
 
         svg {
-          color: #d1d4da;
-          font-size: 18px;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 14px;
+          cursor: pointer;
+          transition: color 0.2s ease, transform 0.2s ease;
+
+          &:hover {
+            color: $accent-gold;
+            transform: translateY(-1px);
+          }
         }
       }
     }
 
     .right {
       display: flex;
+      align-items: center;
 
       a {
-        color: white;
-        font-size: 14px;
-        margin-top: 2px;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 13px;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
         &:hover {
-          text-decoration: underline;
+          color: $accent-gold;
         }
       }
     }
+
     .contactLink {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 7px;
+      font-weight: 500;
 
       .iconOnly {
         display: none;
+        font-size: 14px;
+        color: $accent-gold;
+      }
+
+      svg {
+        font-size: 13px;
+        color: $accent-gold;
       }
 
       @include respond-below(md) {
         .iconOnly {
           display: inline-block;
-          font-size: 16px;
         }
         .textOnly {
           display: none;
@@ -63,9 +87,9 @@
 }
 
 .divider {
-  //   height: px;
   width: 1px;
-  background-color: rgba(255, 255, 255, 0.2);
+  height: 16px;
+  background-color: rgba(255, 255, 255, 0.15);
   margin: 0 16px;
 }
 
@@ -73,26 +97,48 @@
   position: relative;
 
   p {
-    color: white;
+    color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
-    font-size: 15px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $accent-gold;
+    }
+
+    svg {
+      font-size: 10px;
+    }
   }
+
   .dropDown {
     position: absolute;
-    background-color: white;
-
+    background-color: #ffffff;
     right: 0;
-
-    z-index: 100;
+    top: calc(100% + 8px);
+    z-index: 105;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    border: 1px solid $border-soft;
+    min-width: 80px;
 
     p {
-      border: 1px solid $color_green1;
-      padding: 2px 10px;
-      color: $color_green1;
+      padding: 6px 12px;
+      color: $text-charcoal;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
 
       &:hover {
-        background-color: $color_green1;
-        color: white;
+        background-color: rgba(23, 75, 54, 0.08);
+        color: $primary-green;
       }
     }
   }

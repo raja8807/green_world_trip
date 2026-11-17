@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./searchBar.module.scss";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabaseClient";
+import { GeoAltFill, CalendarWeekFill, Search } from "react-bootstrap-icons";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -50,60 +51,58 @@ const SearchBar = () => {
   };
 
   return (
-    <div className={`${styles.searchBox} ${isSticky ? styles.sticky : ""}`} data-aos="fade-up">
+    <div className={`${styles.searchBox} ${isSticky ? styles.sticky : ""}`}>
       <div className={styles.innerWrapper}>
         {/* Destination */}
         <div className={styles.field}>
-      
-
-        <div className={styles.info}>
-          <label>Destination</label>
-
-          <input
-            type="text"
-            list="destination-options"
-            placeholder="Where are you going?"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          />
-          <datalist id="destination-options">
-            {destinationsList.map((dest, idx) => (
-              <option key={idx} value={dest} />
-            ))}
-          </datalist>
-        </div>
-      </div>
-
-      {/* Dates */}
-      <div className={styles.field}>
-      
-
-        <div className={styles.info}>
-          <label>From - To</label>
-
-          <div className={styles.dateWrapper}>
+          <div className={styles.icon}>
+            <GeoAltFill />
+          </div>
+          <div className={styles.info}>
+            <label>Destination</label>
             <input
-              type="date"
-              value={fromDate}
-              onChange={(e) => setFromDate(e.target.value)}
+              type="text"
+              list="destination-options"
+              placeholder="Where do you want to explore?"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             />
-
-            <span>-</span>
-
-            <input
-              type="date"
-              value={toDate}
-              onChange={(e) => setToDate(e.target.value)}
-            />
+            <datalist id="destination-options">
+              {destinationsList.map((dest, idx) => (
+                <option key={idx} value={dest} />
+              ))}
+            </datalist>
           </div>
         </div>
-      </div>
 
+        {/* Dates */}
+        <div className={styles.field}>
+          <div className={styles.icon}>
+            <CalendarWeekFill />
+          </div>
+          <div className={styles.info}>
+            <label>Travel Dates</label>
+            <div className={styles.dateWrapper}>
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+              />
+              <span className={styles.dateSep}>to</span>
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* Button */}
         <button className={styles.searchBtn} onClick={handleSearch}>
-          SEARCH
+          <Search className={styles.btnIcon} />
+          <span>Explore Tours</span>
         </button>
       </div>
     </div>

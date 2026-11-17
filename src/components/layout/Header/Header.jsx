@@ -110,8 +110,18 @@ const NavItem = ({ item }) => {
 };
 
 const Header = () => {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className={styles.header} data-aos="fade-down">
+    <header className={`${styles.header} ${isSticky ? styles.isSticky : ""}`}>
       <TopHeader />
       <div className={styles.mainHead}>
         <CustomContainer lg>
@@ -126,8 +136,13 @@ const Header = () => {
                 </ul>
               </nav>
             </div>
-            <div className={styles.right}>
-              <RightMenu pages={PAGES} />
+            <div className={styles.rightActions}>
+              <Link href="/contact" className={styles.ctaButton}>
+                Plan My Trip
+              </Link>
+              <div className={styles.right}>
+                <RightMenu pages={PAGES} />
+              </div>
             </div>
           </div>
         </CustomContainer>

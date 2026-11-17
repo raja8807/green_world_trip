@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./overview.module.scss";
+import FONTS from "@/styles/fonts";
 import {
   GeoAlt,
   Clock,
@@ -37,7 +38,7 @@ const OverviewSection = ({ tour, reviews }) => {
         {/* Title Row */}
         <div className={styles.headerRow}>
           <div className={styles.titleArea}>
-            <h1 className={styles.title}>{tour.name}</h1>
+            <h1 className={`${styles.title} ${FONTS.font2}`}>{tour.name}</h1>
             <div className={styles.location}>
               <GeoAlt className="me-2" />
               {tour.location ||

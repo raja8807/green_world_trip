@@ -1,7 +1,18 @@
 .FeaturedTours {
-  // padding: 80px 0;
-  h2 {
-    margin-bottom: 20px;
-    font-weight: bold;
+  padding: 80px 0;
+  background-color: #ffffff;
+  border-top: 1px solid rgba(23, 75, 54, 0.05);
+
+  .wrap {
+    margin-top: 10px;
+  }
+
+  .loadingWrapper,
+  .emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    background: $bg-cream;
+    border-radius: 16px;
+    border: 1px solid $border-soft;
   }
 }

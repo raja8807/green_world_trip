@@ -1,45 +1,47 @@
 .regionsPage {
-  padding: 60px 0;
-  background-color: #ffffff;
+  padding: 60px 0 90px;
+  background-color: $bg-cream;
 }
 
 // Controls
 .controlsWrapper {
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 .searchBar {
   display: flex;
   align-items: center;
-  background: #f8f9fa;
-  border: 1px solid rgba(128, 128, 128, 0.25);
-  border-radius: 4px;
-  padding: 10px 15px;
-  max-width: 400px;
-  margin: 0 auto 20px auto;
-  transition: 0.3s ease;
+  background: #ffffff;
+  border: 1px solid $border-soft;
+  border-radius: 50px;
+  padding: 10px 20px;
+  max-width: 440px;
+  margin: 0 auto 24px auto;
+  box-shadow: 0 4px 16px rgba(23, 75, 54, 0.05);
+  transition: all 0.25s ease;
 
   &:focus-within {
-    border-color: #7c8795;
+    border-color: $primary-green;
+    box-shadow: 0 6px 20px rgba(23, 75, 54, 0.12);
   }
 
   .searchIcon {
-    color: #7c8795;
+    color: $primary-green;
     font-size: 1.1rem;
-    margin-right: 10px;
+    margin-right: 12px;
   }
 
   input {
     flex-grow: 1;
     border: none;
     outline: none;
-    padding: 5px 0;
-    font-size: 1rem;
-    color: #333;
+    padding: 6px 0;
+    font-size: 0.95rem;
+    color: $text-charcoal;
     background: transparent;
 
     &::placeholder {
-      color: #999;
+      color: #9eb2a4;
     }
   }
 }
@@ -51,24 +53,28 @@
   gap: 10px;
 
   .pillBtn {
-    background: transparent;
-    border: 1px solid rgba(128, 128, 128, 0.25);
-    padding: 6px 16px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    color: #7c8795;
-    transition: 0.3s ease;
+    background: #ffffff;
+    border: 1px solid $border-soft;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $text-muted;
+    transition: all 0.25s ease;
     cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 
     &:hover {
-      background: #f8f9fa;
-      color: #333;
+      background: rgba(23, 75, 54, 0.06);
+      color: $primary-green;
+      border-color: rgba(23, 75, 54, 0.2);
     }
 
     &.active {
-      background: #333;
-      border-color: #333;
-      color: #fff;
+      background: $primary-green;
+      border-color: $primary-green;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(23, 75, 54, 0.25);
     }
   }
 }
@@ -82,38 +88,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ececec;
-  padding-bottom: 10px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid $border-soft;
+  padding-bottom: 12px;
 
   .regionTitle {
-    font-size: 24px;
-    font-weight: 500;
-    color: #333;
+    font-size: 26px;
+    font-weight: 700;
+    color: $text-charcoal;
     margin: 0;
   }
 
   .regionCount {
-    color: #7c8795;
-    font-size: 14px;
+    color: $primary-green;
+    font-size: 13.5px;
+    font-weight: 600;
+    background: rgba(23, 75, 54, 0.08);
+    padding: 4px 12px;
+    border-radius: 30px;
   }
 }
 
 .statesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 18px;
 }
 
 // Cards
 .stateCard {
-  background: #fff;
-  border: 1px solid rgba(128, 128, 128, 0.25);
-  border-radius: 4px;
-  padding: 20px;
+  background: #ffffff;
+  border: 1px solid $border-soft;
+  border-radius: 14px;
+  padding: 22px 18px;
   text-decoration: none;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
-  transition: 0.3s ease;
+  box-shadow: 0 4px 16px rgba(23, 75, 54, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,23 +131,27 @@
   min-height: 80px;
 
   .stateName {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    transition: 0.3s ease;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: $text-charcoal;
+    transition: color 0.25s ease;
   }
 
   &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(23, 75, 54, 0.1);
+    border-color: rgba(217, 183, 121, 0.5);
+
     .stateName {
-      color: #28a8ff;
+      color: $primary-green;
     }
   }
 }
 
-@media (max-width: 768px) {
+@include respond-below(md) {
   .regionHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
   }
 }

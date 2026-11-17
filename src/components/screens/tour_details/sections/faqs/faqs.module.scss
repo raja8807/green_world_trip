@@ -1,24 +1,37 @@
 .faqsSection {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 .sectionTitle {
   font-size: 24px;
-  font-weight: 500;
-  color: #1f2d4d;
+  font-weight: 700;
+  color: $text-charcoal;
   margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    background: $accent-gold;
+    border-radius: 2px;
+  }
 }
 
 .divider {
   border: 0;
-  border-top: 1px solid #eaeaea;
-  margin-bottom: 30px;
+  border-top: 1px solid $border-soft;
+  margin-bottom: 25px;
 }
 
 .accordionGroup {
   :global(.accordion-item) {
     border: none;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid $border-soft;
     border-radius: 0;
     margin-bottom: 0;
     overflow: hidden;
@@ -27,11 +40,15 @@
   
   :global(.accordion-button) {
     background-color: transparent !important;
-    color: #1f2d4d !important;
+    color: $text-charcoal !important;
     font-size: 16px;
-    font-weight: 400;
-    padding: 25px 0;
+    font-weight: 600;
+    padding: 20px 0;
     box-shadow: none !important;
+
+    &:not(.collapsed) {
+      color: $primary-green !important;
+    }
 
     &::after {
       background-size: 14px;
@@ -39,9 +56,9 @@
   }
 
   :global(.accordion-body) {
-    padding: 0 0 25px 0;
-    color: #7c8795;
-    line-height: 1.6;
+    padding: 0 0 24px 0;
+    color: #49544e;
+    line-height: 1.8;
     font-size: 15px;
     
     p {
@@ -53,15 +70,15 @@
 .headContent {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
 }
 
 .qIcon {
-  color: #7c8795;
-  font-size: 20px;
+  color: $primary-green;
+  font-size: 18px;
   flex-shrink: 0;
 }
 
 .questionText {
-  color: #1f2d4d;
+  color: inherit;
 }

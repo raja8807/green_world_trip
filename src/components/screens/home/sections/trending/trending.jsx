@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./trending.module.scss";
 import TourCard from "@/components/common/tour_card/tour_card";
 import CustomContainer from "@/components/ui/custom_container/custom_container";
+import SectionHeading from "@/components/common/section_heading/section_heading";
 import { Col, Row } from "react-bootstrap";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -12,7 +13,6 @@ const TrendingTours = () => {
   useEffect(() => {
     const fetchTrendingTours = async () => {
       try {
-        // Fetch tours where the flags JSONB column contains { "is_trending": true }
         const { data, error } = await supabase
           .from("tours")
           .select("*")
@@ -21,7 +21,6 @@ const TrendingTours = () => {
 
         if (error) throw error;
         
-        // Fallback: If no tours are marked 'is_trending', try 'is_featured'
         if (!data || data.length === 0) {
            const { data: featuredData, error: featuredError } = await supabase
              .from("tours")
@@ -46,22 +45,32 @@ const TrendingTours = () => {
   return (
     <section className={styles.TrendingTours} data-aos="fade-up">
       <CustomContainer>
-        <h2>Trending Tours</h2>
+        <SectionHeading 
+          subtitle="POPULAR RIGHT NOW"
+          title="Trending Journeys"
+          text="Discover the most sought-after itineraries loved by our travelers this season."
+          viewAllLink="/domestic"
+          viewAllText="Explore All Tours"
+        />
         <div className={styles.wrap}>
           {loading ? (
-             <p className="text-muted">Loading trending tours...</p>
+             <div className={styles.loadingWrapper}>
+               <p className="text-muted">Loading trending tours...</p>
+             </div>
           ) : tours && tours.length > 0 ? (
-            <Row>
+            <Row className="g-4">
               {tours.map((tour) => {
                 return (
-                  <Col key={tour.id} xs={12} md={6} lg={3} className="mb-4">
+                  <Col key={tour.id} xs={12} sm={6} lg={3}>
                     <TourCard tour={tour} />
                   </Col>
                 );
               })}
             </Row>
           ) : (
-             <p className="text-muted">No trending tours available right now.</p>
+             <div className={styles.emptyState}>
+               <p className="text-muted">No trending tours available right now.</p>
+             </div>
           )}
         </div>
       </CustomContainer>

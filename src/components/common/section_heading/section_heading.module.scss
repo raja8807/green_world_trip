@@ -1,50 +1,95 @@
 .SectionHeading {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 48px;
+  position: relative;
+
+  .subtitle {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $primary-green;
+    background: $primary-green-subtle;
+    padding: 6px 16px;
+    border-radius: $radius-pill;
+    margin-bottom: 12px;
+    border: 1px solid rgba($primary-green, 0.12);
+  }
 
   p {
-    font-size: 20px;
-    color: $color_blue1;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 5px;
-    margin-bottom: 8px;
-    // font-weight: 500;
+    color: $primary-green;
+    background: $primary-green-subtle;
+    padding: 6px 16px;
+    border-radius: $radius-pill;
+    margin-bottom: 12px;
+    border: 1px solid rgba($primary-green, 0.12);
   }
 
   h2 {
-    font-size: 50px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: white;
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-weight: 700;
+    color: $text-charcoal;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    font-family: var(--font-heading), "Playfair Display", Georgia, serif;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .accentLine {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, $primary-green 0%, $accent-gold 100%);
+    border-radius: $radius-pill;
+    margin: 14px auto 0;
   }
 
   &.v2 {
-    p {
-      color: $color_b1;
+    text-align: left;
+    margin-bottom: 36px;
+
+    p, .subtitle {
+      background: rgba($accent-gold, 0.15);
+      color: darken($accent-gold, 25%);
+      border-color: rgba($accent-gold, 0.3);
     }
 
     h2 {
-      color: white;
+      margin: 0;
+    }
+
+    .accentLine {
+      margin-left: 0;
     }
   }
 
-  &.v3 {
-    p {
-      color: $color_b1;
+  &.light {
+    p, .subtitle {
+      background: rgba(255, 255, 255, 0.15);
+      color: $accent-gold-light;
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     h2 {
-      color: $color_blue1;
+      color: #ffffff;
+    }
+
+    .accentLine {
+      background: $accent-gold;
     }
   }
 
   @include respond-below(md) {
-    p {
-      font-size: 18px;
-    }
+    margin-bottom: 32px;
 
     h2 {
-      font-size: 30px;
+      font-size: 26px;
     }
   }
 }

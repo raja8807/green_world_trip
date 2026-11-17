@@ -1,26 +1,53 @@
 .header {
   position: relative;
   z-index: 1000;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.isSticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1020;
+    box-shadow: 0 4px 20px rgba(23, 75, 54, 0.08);
+
+    .mainHead {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(23, 75, 54, 0.06);
+
+      .wrap {
+        padding: 12px 0;
+      }
+    }
+  }
 }
 
 .mainHead {
   position: relative;
+  background: #ffffff;
+  border-bottom: 1px solid $border-soft;
+  transition: all 0.3s ease;
 
   .wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 18px 0;
+    transition: padding 0.3s ease;
 
     .left {
       display: flex;
       align-items: center;
-      gap: 70px;
+      gap: 50px;
 
       .navLg {
         ul {
           display: flex;
-          gap: 40px;
+          align-items: center;
+          gap: 32px;
           padding: 0;
           margin: 0;
 
@@ -30,88 +57,119 @@
 
             a,
             p {
-              color: $color_blue1;
-              // font-size: 18px;
-              font-size: 14px;
-              font-weight: 800;
+              color: $text-charcoal;
+              font-size: 13.5px;
+              font-weight: 600;
               cursor: pointer;
               text-transform: uppercase;
-              letter-spacing: 1.2px;
+              letter-spacing: 0.8px;
+              margin: 0;
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+              padding: 6px 0;
+              position: relative;
+              transition: color 0.25s ease;
+
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: $primary-green;
+                transition: width 0.25s ease;
+                border-radius: 2px;
+              }
 
               &:hover {
-                color: $color_green1;
+                color: $primary-green;
+
+                &::after {
+                  width: 100%;
+                }
+              }
+
+              svg {
+                font-size: 11px;
+                transition: transform 0.25s ease;
+              }
+            }
+
+            &:hover {
+              > a svg,
+              > p svg {
+                transform: rotate(180deg);
+                color: $primary-green;
               }
             }
 
             .dropdownWrap {
               position: absolute;
-              top: 0px;
-              padding-top: 30px;
+              top: 100%;
+              left: 0;
+              padding-top: 12px;
+              z-index: 100;
 
               .dropdown {
-                background-color: white;
-
-                padding: 18px 16px;
-                min-width: 220px;
-                border-radius: 4px;
+                background-color: #ffffff;
+                padding: 12px;
+                min-width: 230px;
+                border-radius: 14px;
                 display: flex;
                 flex-direction: column;
-                gap: 16px;
-                // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-                animation: openDropDown 0.25s;
+                gap: 6px;
+                box-shadow: 0 12px 36px rgba(23, 75, 54, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+                border: 1px solid $border-soft;
+                animation: openDropDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
                 transform-origin: top;
+
+                a,
+                p {
+                  color: $text-charcoal;
+                  font-size: 13.5px;
+                  font-weight: 500;
+                  padding: 9px 14px;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  text-transform: none;
+                  letter-spacing: 0;
+                  transition: all 0.2s ease;
+
+                  &::after {
+                    display: none;
+                  }
+
+                  &:hover {
+                    background-color: rgba(23, 75, 54, 0.06);
+                    color: $primary-green;
+                    padding-left: 18px;
+                  }
+                }
 
                 .subDropdown {
                   position: relative;
 
-                  a,
-                  p {
-                    // color: white;
-                    display: none;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 10px;
-                    cursor: pointer;
-                  }
-
                   .subDropdownWrap {
                     position: absolute;
-                    top: -30px;
+                    top: 0;
                     left: 100%;
-                    padding-top: 30px;
+                    padding-left: 10px;
 
                     .subDropdown {
-                      background-color: $color_b1;
-                      padding: 10px;
-                      min-width: 250px;
-                      border-radius: 10px;
+                      background-color: #ffffff;
+                      padding: 12px;
+                      min-width: 230px;
+                      border-radius: 14px;
                       display: flex;
                       flex-direction: column;
-                      // gap: 16px;
-                      // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-                      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-                      animation: openDropDown 0.25s;
-                      transform-origin: top;
+                      gap: 6px;
+                      box-shadow: 0 12px 36px rgba(23, 75, 54, 0.12);
+                      border: 1px solid $border-soft;
                     }
-                  }
-                }
-
-                a,
-                p {
-                  // color: white;
-                  font-size: 13px;
-                  font-weight: bold;
-                  display: block;
-                  cursor: pointer;
-                  // border-bottom: 1px solid rgb(213, 213, 213);
-
-                  // margin-bottom: 10px;
-
-                  &:hover {
-                    color: $color_green1;
                   }
                 }
               }
@@ -121,12 +179,47 @@
       }
     }
 
-    .right {
-      display: none;
+    .rightActions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .ctaButton {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: $primary-green;
+        color: #ffffff;
+        font-size: 13.5px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 10px 22px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 14px rgba(23, 75, 54, 0.25);
+        border: 1px solid transparent;
+
+        &:hover {
+          background: #0E3324;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(23, 75, 54, 0.35);
+          color: #ffffff;
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      .right {
+        display: none;
+      }
     }
   }
 
-  @include respond-below(md) {
+  @include respond-below(lg) {
     .wrap {
       .left {
         .navLg {
@@ -134,9 +227,26 @@
         }
       }
 
-      .right {
-        display: flex;
+      .rightActions {
+        .ctaButton {
+          display: none;
+        }
+
+        .right {
+          display: flex;
+        }
       }
     }
+  }
+}
+
+@keyframes openDropDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

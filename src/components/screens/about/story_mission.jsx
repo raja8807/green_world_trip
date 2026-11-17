@@ -54,11 +54,7 @@ const StoryMission = () => {
             </div>
             <h3>Our Story</h3>
             <p>
-              Non id porta vitae at nibh in lorem. Aenean elit facilisis eu a
-              maecenas in ridiculus. Magna varius sit amet metus quis mollis sed
-              et amet magna. Nam id quis leo nisl vitae elit fringilla rutrum.
-              Aenean elit facilisis eu a maecenas in ridiculus varius sit amet
-              metus quis mollis sed et amet magna.
+              Founded with a deep passion for exploration, Green World Trip was born out of a desire to make premium travel effortless, enriching, and deeply personal. From the serene backwaters of Kerala to the snow-clad peaks of the Himalayas and vibrant global horizons, we connect travelers with the authentic heart of each destination.
             </p>
           </div>
         </Col>
@@ -70,13 +66,9 @@ const StoryMission = () => {
                 alt="Our mission"
               />
             </div>
-            <h3>Our mission</h3>
+            <h3>Our Mission</h3>
             <p>
-              Non id porta vitae at nibh in lorem. Aenean elit facilisis eu a
-              maecenas in ridiculus. Magna varius sit amet metus quis mollis sed
-              et amet magna. Nam id quis leo nisl vitae elit fringilla rutrum.
-              Aenean elit facilisis eu a maecenas in ridiculus varius sit amet
-              metus quis mollis sed et amet magna.
+              Our mission is to craft transformative travel experiences celebrating natural beauty and cultural wonder. We combine meticulous itinerary planning with hand-selected boutique stays, verified local experts, and 24/7 dedicated support—ensuring each journey is completely seamless and unforgettable.
             </p>
           </div>
         </Col>

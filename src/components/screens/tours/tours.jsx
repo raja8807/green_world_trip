@@ -98,14 +98,16 @@ const ToursScreen = ({ tours, error, category, initialSearchQuery = "" }) => {
             </div>
           ) : (
             <>
-              <div className="mb-4">
+              <div className={styles.topControlRow}>
                 <button 
                   onClick={() => router.back()} 
-                  className="btn btn-light shadow-sm d-inline-flex align-items-center px-4 py-2"
-                  style={{ borderRadius: '8px', fontWeight: '600', color: '#444' }}
+                  className={styles.backButton}
                 >
-                  <ArrowLeft className="me-2" /> Back
+                  <ArrowLeft /> Back
                 </button>
+                <div className={styles.resultsCount}>
+                  Showing <b>{filteredTours.length}</b> {filteredTours.length === 1 ? 'Tour' : 'Tours'}
+                </div>
               </div>
               <div className={styles.layoutWrapper}>
               
@@ -208,7 +210,7 @@ const ToursScreen = ({ tours, error, category, initialSearchQuery = "" }) => {
                   <div className={styles.noTours}>
                     <p>No tours match your selected filters.</p>
                     <button 
-                      className="btn btn-outline-primary mt-3"
+                      className={styles.clearFilterBtn}
                       onClick={() => {
                         setSelectedDests([]);
                         setSelectedTypes([]);

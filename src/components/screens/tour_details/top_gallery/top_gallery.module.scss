@@ -1,21 +1,22 @@
 .galleryWrapper {
   padding-top: 30px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .gridContainer {
   position: relative;
   display: flex;
-  height: 50vh;
-  min-height: 400px;
-  max-height: 600px;
-  border-radius: 16px;
+  height: 55vh;
+  min-height: 420px;
+  max-height: 620px;
+  border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 12px 35px rgba(10, 26, 18, 0.12);
 
   &:hover {
     .mainImage {
-      filter: brightness(0.95);
+      transform: scale(1.02);
     }
   }
 
@@ -24,32 +25,33 @@
     width: 100%;
     background-size: cover;
     background-position: center;
-    transition: filter 0.3s ease, transform 0.5s ease;
-
-    &:hover {
-      filter: brightness(1) !important;
-    }
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
   }
 
   .showAllBtn {
     position: absolute;
     bottom: 24px;
     right: 24px;
-    background: white;
-    border: 1px solid #222;
-    padding: 8px 16px;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 50px;
     font-weight: 600;
-    font-size: 14px;
-    display: flex;
+    font-size: 13.5px;
+    color: $text-charcoal;
+    display: inline-flex;
     align-items: center;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 
     &:hover {
-      background: #f8f9fa;
-      transform: scale(1.02);
+      background: $primary-green;
+      color: #ffffff;
+      border-color: $primary-green;
+      transform: translateY(-2px);
     }
   }
 }
@@ -57,11 +59,11 @@
 // Modal Styles
 .fullscreenModal {
   .modalHeader {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $border-soft;
   }
   
   .modalBody {
-    background-color: #f7f7f9;
+    background-color: $bg-cream;
     padding: 40px;
   }
 
@@ -75,8 +77,8 @@
     .fullImg {
       width: 100%;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(10, 26, 18, 0.1);
     }
   }
 }
@@ -86,7 +88,15 @@
     padding-top: 0;
   }
   .gridContainer {
-    height: 300px;
+    height: 320px;
+    min-height: 300px;
     border-radius: 0;
+
+    .showAllBtn {
+      bottom: 16px;
+      right: 16px;
+      padding: 8px 16px;
+      font-size: 12.5px;
+    }
   }
 }

@@ -11,56 +11,71 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 25px;
+  gap: 24px;
 
   .title {
-    font-size: 32px;
-    font-weight: 500;
-    color: #1f2d4d;
-    margin-bottom: 10px;
+    font-size: 36px;
+    font-weight: 700;
+    color: $text-charcoal;
+    margin-bottom: 12px;
+    line-height: 1.25;
+
+    @include respond-below(md) {
+      font-size: 28px;
+    }
   }
 
   .location {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #7c8795;
-    font-size: 15px;
+    color: $primary-green;
+    font-size: 14.5px;
+    font-weight: 600;
 
     svg {
-      font-size: 18px;
+      font-size: 16px;
+      color: $primary-green;
     }
   }
 }
 
 .ratingArea {
   text-align: right;
+  flex-shrink: 0;
 
   .ratingStars {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-bottom: 5px;
-  }
-
-  .badge {
-    color: #1f2d4d;
-    font-weight: 600;
-    font-size: 14px;
     margin-bottom: 4px;
   }
 
+  .badge {
+    color: #ffffff;
+    background: $primary-green;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 30px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
   .stars {
-    color: #ffc107;
+    color: $accent-gold;
     font-size: 16px;
     letter-spacing: 2px;
   }
 
   .reviewCount {
-    color: #28a8ff;
-    font-size: 14px;
+    color: $text-muted;
+    font-size: 13px;
     text-decoration: none;
 
     &:hover {
+      color: $primary-green;
       text-decoration: underline;
     }
   }
@@ -68,27 +83,30 @@
 
 .divider {
   border: 0;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid $border-soft;
   margin: 0;
 }
 
 .quickInfoRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 0;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 24px 0;
 }
 
 .infoBox {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: $bg-cream;
+  border: 1px solid rgba(23, 75, 54, 0.08);
 
   .icon {
-    font-size: 32px;
-    color: #28a8ff; // matching blue accent
+    font-size: 24px;
+    color: $primary-green;
+    flex-shrink: 0;
   }
 
   div {
@@ -97,31 +115,48 @@
   }
 
   .label {
-    color: #28a8ff;
-    font-size: 14px;
+    color: $text-muted;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 2px;
   }
 
   .value {
-    color: #7c8795;
+    color: $text-charcoal;
     font-size: 15px;
+    font-weight: 700;
   }
 }
 
 .textSection {
-  margin-top: 40px;
+  margin-top: 36px;
 
   .sectionTitle {
-    font-size: 24px;
-    font-weight: 500;
-    color: #1f2d4d;
-    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    color: $text-charcoal;
+    margin-bottom: 16px;
+    position: relative;
+    padding-bottom: 8px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 32px;
+      height: 2px;
+      background: $accent-gold;
+      border-radius: 2px;
+    }
   }
 
   .paragraph {
-    color: #495057;
-    line-height: 1.7;
-    font-size: 16px;
+    color: #49544e;
+    line-height: 1.8;
+    font-size: 15.5px;
   }
 }
 
@@ -133,18 +168,20 @@
   li {
     display: flex;
     align-items: center;
-    color: #495057;
-    font-size: 16px;
-    margin-bottom: 20px;
+    color: #3b4540;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 14px;
     line-height: 1.5;
 
     .circle {
       width: 8px;
       height: 8px;
-      border: 1px solid #28a8ff;
+      background: $accent-gold;
       border-radius: 50%;
-      margin-right: 15px;
+      margin-right: 14px;
       flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(217, 183, 121, 0.25);
     }
   }
 }
@@ -152,7 +189,7 @@
 @media (max-width: 768px) {
   .headerRow {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 
     .ratingArea {
       text-align: left;

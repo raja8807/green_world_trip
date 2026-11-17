@@ -4,6 +4,10 @@ import { Image } from "react-bootstrap";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { getImageUrl } from "@/utils/image";
+import SectionHeading from "@/components/common/section_heading/section_heading";
+import CustomContainer from "@/components/ui/custom_container/custom_container";
+import FONTS from "@/styles/fonts";
+import { ArrowUpRight } from "react-bootstrap-icons";
 
 const DestinationsSection = () => {
   const [destinations, setDestinations] = useState([]);
@@ -31,20 +35,30 @@ const DestinationsSection = () => {
 
   return (
     <section className={styles.DestinationsSection} data-aos="fade-up">
-      <div className={styles.container}>
-        <h2>Top Destinations</h2>
+      <CustomContainer>
+        <SectionHeading 
+          subtitle="ICONIC LOCALES"
+          title="Top Destinations"
+          text="From majestic cultural sanctuaries to sun-drenched coastal wonders, find your next getaway."
+          viewAllLink="/domestic"
+          viewAllText="Explore All"
+        />
 
         <div className={styles.grid}>
           {loading ? (
-             <p className="text-muted">Loading destinations...</p>
+             <div className={styles.loadingWrapper}>
+               <p className="text-muted">Loading destinations...</p>
+             </div>
           ) : (
-            destinations.map((item) => (
+            destinations.map((item, idx) => (
               <Link
-                href={item.href}
+                href={item.href || "#"}
                 key={item.id}
                 className={`${styles.card} ${
                   item.is_large ? styles.large : ""
                 }`}
+                data-aos="fade-up"
+                data-aos-delay={idx * 100}
               >
                 <Image
                   src={getImageUrl(item.image)}
@@ -55,15 +69,22 @@ const DestinationsSection = () => {
                 <div className={styles.overlay}></div>
 
                 <div className={styles.content}>
-                  <h3>{item.title}</h3>
+                  <div className={styles.topInfo}>
+                    <span className={styles.tourBadge}>
+                      {item.tours_text || "Explore"}
+                    </span>
+                    <span className={styles.arrowCircle}>
+                      <ArrowUpRight />
+                    </span>
+                  </div>
 
-                  <button>{item.tours_text}</button>
+                  <h3 className={FONTS.font2}>{item.title}</h3>
                 </div>
               </Link>
             ))
           )}
         </div>
-      </div>
+      </CustomContainer>
     </section>
   );
 };

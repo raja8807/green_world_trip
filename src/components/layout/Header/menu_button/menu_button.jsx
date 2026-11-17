@@ -97,7 +97,6 @@ const RightMenu = ({ pages }) => {
 
           <Offcanvas.Body className={styles.drawerBody}>
             
-            <div>
               <nav className={styles.navSm}>
                 <ul>
                   {pages.map((page) => {
@@ -111,9 +110,27 @@ const RightMenu = ({ pages }) => {
                   })}
                 </ul>
               </nav>
-            </div>
 
-       
+            <div className={styles.drawerFooter}>
+              <Link 
+                href="/contact" 
+                className={styles.mobileCtaBtn}
+                onClick={() => setShowDrawer(false)}
+              >
+                Plan My Trip
+              </Link>
+
+              <div className={styles.contactDetails}>
+                <a href={`tel:+${CONTACT_DETAILS.phone1.number}`} className={styles.contactItem}>
+                  <TelephoneFill />
+                  <span>{CONTACT_DETAILS.phone1.text}</span>
+                </a>
+                <a href={`mailto:${CONTACT_DETAILS.emails[0]}`} className={styles.contactItem}>
+                  <EnvelopeAtFill />
+                  <span>{CONTACT_DETAILS.emails[0]}</span>
+                </a>
+              </div>
+            </div>
           </Offcanvas.Body>
         </Offcanvas>
       </div>

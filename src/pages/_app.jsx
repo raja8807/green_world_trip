@@ -11,7 +11,7 @@ import Head from "next/head";
 import { ToastContainer } from "react-toastify";
 import Layout from "@/components/layout/layout";
 import AdminLayout from "@/components/layout/admin_layout/admin_layout";
-import { FONTS } from "@/styles/fonts";
+import { FONTS, FONT_VARIABLES } from "@/styles/fonts";
 import LoadingScreen from "@/components/ui/loading_screen/loading_screen";
 import SEO from "@/components/common/seo/seo";
 import UnderConstruction from "@/components/common/under_construction/under_construction";
@@ -65,7 +65,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SEO />
 
-      <main className={FONTS.font1}>
+      <main className={`${FONTS.font1} ${FONT_VARIABLES}`}>
         {isAdmin ? (
           <AdminLayout>
             <Component {...pageProps} />

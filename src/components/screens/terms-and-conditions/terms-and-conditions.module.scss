@@ -1,36 +1,55 @@
 .policySection {
-  padding: 80px 0;
-  background-color: #ffffff;
+  padding: 80px 0 100px;
+  background-color: $bg-cream;
 }
 
 .contentWrapper {
   max-width: 900px;
   margin: 0 auto;
-  color: $color_b3;
+  color: #49544e;
   line-height: 1.8;
-  font-size: 16px;
+  font-size: 15.5px;
+  background: #ffffff;
+  padding: 48px;
+  border-radius: 20px;
+  border: 1px solid $border-soft;
+  box-shadow: 0 8px 30px rgba(23, 75, 54, 0.04);
 
   .pageTitle {
-    margin-bottom: 40px;
-    color: $color_b1;
+    margin-bottom: 30px;
+    color: $text-charcoal;
     font-weight: 700;
     text-align: center;
   }
 
   h2 {
     margin-bottom: 25px;
-    color: $color_b2;
+    color: $text-charcoal;
     font-weight: 700;
   }
 
   h3 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: $color_b1;
-    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 16px;
+    color: $primary-green;
+    font-weight: 700;
+    font-size: 1.3rem;
   }
 
   p {
+    margin-bottom: 18px;
+  }
+
+  ul {
     margin-bottom: 20px;
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+
+  @include respond-below(md) {
+    padding: 28px 20px;
   }
 }

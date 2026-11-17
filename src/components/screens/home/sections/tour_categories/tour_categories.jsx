@@ -5,6 +5,8 @@ import styles from "./tour_categories.module.scss";
 import { TOUR_CATEGORIES } from "@/constants/constants";
 import Link from "next/link";
 import { getImageUrl } from "@/utils/image";
+import FONTS from "@/styles/fonts";
+import { ArrowRight } from "react-bootstrap-icons";
 
 const TourCategories = () => {
   return (
@@ -13,7 +15,7 @@ const TourCategories = () => {
         <Row>
           {TOUR_CATEGORIES.map((category) => (
             <Col lg={category.colLg} md={category.colMd} key={category.id}>
-              <Link href={category.href}>
+              <Link href={category.href} className={styles.cardLink}>
                 <div
                   className={styles.categoryCard}
                   data-aos="fade-up"
@@ -22,9 +24,12 @@ const TourCategories = () => {
                   <Image src={getImageUrl(category.image)} alt={category.title} />
                   <div className={styles.overlay}></div>
                   <div className={styles.content}>
-                    <div className={styles.subtitle}>{category.subtitle}</div>
-                    <h3>{category.title}</h3>
+                    <span className={styles.subtitle}>{category.subtitle}</span>
+                    <h3 className={FONTS.font2}>{category.title}</h3>
                     <p>{category.offer}</p>
+                    <span className={styles.exploreLink}>
+                      Explore Collection <ArrowRight />
+                    </span>
                   </div>
                 </div>
               </Link>

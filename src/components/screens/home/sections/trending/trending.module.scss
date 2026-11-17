@@ -1,7 +1,18 @@
 .TrendingTours {
   padding: 80px 0;
-  h2 {
-    margin-bottom: 20px;
-    font-weight: bold;
+  background-color: $bg-cream;
+  border-top: 1px solid rgba(23, 75, 54, 0.05);
+
+  .wrap {
+    margin-top: 10px;
+  }
+
+  .loadingWrapper,
+  .emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid $border-soft;
   }
 }

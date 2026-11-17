@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./featured.module.scss";
 import TourCard from "@/components/common/tour_card/tour_card";
 import CustomContainer from "@/components/ui/custom_container/custom_container";
+import SectionHeading from "@/components/common/section_heading/section_heading";
 import { Col, Row } from "react-bootstrap";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -34,22 +35,32 @@ const FeaturedTours = () => {
   return (
     <section className={styles.FeaturedTours} data-aos="fade-up">
       <CustomContainer>
-        <h2>Featured Tours</h2>
+        <SectionHeading 
+          subtitle="SIGNATURE EXPERIENCES"
+          title="Featured Expeditions"
+          text="Immerse yourself in exceptional itineraries with hand-selected luxury stays and guides."
+          viewAllLink="/international"
+          viewAllText="View All Expeditions"
+        />
         <div className={styles.wrap}>
           {loading ? (
-             <p className="text-muted">Loading featured tours...</p>
+             <div className={styles.loadingWrapper}>
+               <p className="text-muted">Loading featured tours...</p>
+             </div>
           ) : tours && tours.length > 0 ? (
-            <Row>
+            <Row className="g-4">
               {tours.map((tour) => {
                 return (
-                  <Col key={tour.id} xs={12} md={6} lg={3} className="mb-4">
+                  <Col key={tour.id} xs={12} sm={6} lg={3}>
                     <TourCard tour={tour} />
                   </Col>
                 );
               })}
             </Row>
           ) : (
-             <p className="text-muted">No featured tours available right now.</p>
+             <div className={styles.emptyState}>
+               <p className="text-muted">No featured tours available right now.</p>
+             </div>
           )}
         </div>
       </CustomContainer>

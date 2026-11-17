@@ -1,9 +1,66 @@
-$color_b1: #0b0b0b;
-$color_b2: #121212;
-$color_b3: #222222;
+// =============================================================================
+// Green World Trip — Premium Nature-Inspired Design System Variables
+// =============================================================================
 
-$color_text_grey: #ffffffa6;
-$color_text_grey2: #e1dfdf;
+// Primary Brand Palette
+$primary-green: #174b36;
+$primary-green-dark: #0f3526;
+$primary-green-deep: #082218;
+$primary-green-light: #23654b;
+$primary-green-subtle: #edf3f0;
 
-$color_green1: #73b63b;
-$color_blue1: #04a8e9;
+// Secondary Brand Palette (Sage)
+$secondary-sage: #8daa91;
+$secondary-sage-dark: #6f8d74;
+$secondary-sage-light: #e6ede8;
+$secondary-sage-subtle: #f2f6f3;
+
+// Warm Golden Sand Accent
+$accent-gold: #d9b779;
+$accent-gold-dark: #b89758;
+$accent-gold-light: #f7eedb;
+$accent-gold-subtle: #fcf9f2;
+
+// Backgrounds & Surfaces
+$bg-cream: #fafaf7;
+$bg-surface: #ffffff;
+$bg-surface-elevated: #ffffff;
+$bg-alt: #f3f5f2;
+
+// Typography Colors
+$text-charcoal: #202923;
+$text-secondary: #58635c;
+$text-muted: #737b75;
+$text-light: #ffffff;
+$text-light-muted: rgba(255, 255, 255, 0.75);
+
+// Borders & Dividers
+$border-light: #e8ece8;
+$border-soft: #e8ece8;
+$border-subtle: rgba(23, 75, 54, 0.08);
+$border-medium: #d6ded8;
+$primary-forest: #0e3324;
+
+// Elevation & Shadows
+$shadow-xs: 0 1px 3px rgba(16, 42, 30, 0.04);
+$shadow-sm: 0 4px 12px rgba(16, 42, 30, 0.05);
+$shadow-md: 0 10px 28px rgba(16, 42, 30, 0.08);
+$shadow-lg: 0 18px 45px rgba(16, 42, 30, 0.12);
+$shadow-hover: 0 22px 50px rgba(16, 42, 30, 0.16);
+
+// Radii
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$radius-pill: 9999px;
+
+// Backward Compatibility Aliases for legacy files
+$color_green1: $primary-green;
+$color_blue1: $accent-gold;
+$color_b1: $text-charcoal;
+$color_b2: $primary-green-dark;
+$color_b3: #1c2720;
+$color_text_grey: #a0aba3;
+$color_text_grey2: #d8deda;
