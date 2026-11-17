@@ -1,16 +1,68 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Container, Row, Col, Nav, Button } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Button, Spinner } from 'react-bootstrap';
 import styles from './admin_layout.module.scss';
-import { MapFill, GeoAltFill, List, X, ChatSquareQuoteFill, EnvelopePaperFill, EnvelopeOpenFill, CalendarCheckFill } from 'react-bootstrap-icons';
+import { 
+  MapFill, 
+  GeoAltFill, 
+  List, 
+  X, 
+  ChatSquareQuoteFill, 
+  EnvelopePaperFill, 
+  EnvelopeOpenFill, 
+  CalendarCheckFill,
+  BoxArrowRight,
+  BoxArrowUpRight,
+  PersonCircle
+} from 'react-bootstrap-icons';
+import { useAuth } from '@/context/AuthContext';
+import AdminLoginForm from '@/components/screens/admin/admin_login_form/admin_login_form';
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
+  const { user, loading, signOut } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
+
+  const isLoginPage = router.pathname === '/admin/login';
+
+  // If on login page, render child component directly without admin layout chrome
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
+
+  // Loading state while verifying user session
+  if (loading) {
+    return (
+      <div 
+        style={{ 
+          minHeight: '100vh', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          gap: '16px', 
+          backgroundColor: '#f4f6f9' 
+        }}
+      >
+        <Spinner animation="border" variant="success" />
+        <span className="text-muted small">Checking admin authentication...</span>
+      </div>
+    );
+  }
+
+  // If not authenticated, directly render the AdminLoginForm!
+  // No blank page! No redirect errors!
+  if (!user) {
+    return <AdminLoginForm onSuccess={() => router.replace(router.asPath)} />;
+  }
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <div className={styles.adminLayout}>
@@ -47,14 +99,51 @@ const AdminLayout = ({ children }) => {
                   <CalendarCheckFill className="me-2" /> Bookings
                 </Link>
               </Nav>
+
+              <div className={styles.sidebarFooter}>
+                <Button 
+                  variant="outline-danger" 
+                  size="sm" 
+                  className="w-100 d-flex align-items-center justify-content-center gap-2"
+                  onClick={handleSignOut}
+                >
+                  <BoxArrowRight /> Sign Out
+                </Button>
+              </div>
             </div>
           </Col>
           
           <Col md={9} lg={10} className={styles.mainContent}>
             <div className={styles.topbar}>
-              <Button variant="outline-secondary" className="d-md-none mb-3" onClick={toggleSidebar}>
-                <List size={24} /> Menu
-              </Button>
+              <div className={styles.topbarLeft}>
+                <Button variant="outline-secondary" className="d-md-none" onClick={toggleSidebar}>
+                  <List size={22} />
+                </Button>
+              </div>
+
+              <div className={styles.topbarRight}>
+                <Link 
+                  href="/" 
+                  target="_blank" 
+                  className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1"
+                >
+                  <BoxArrowUpRight size={13} /> View Website
+                </Link>
+
+                <div className={styles.userBadge}>
+                  <PersonCircle size={18} className="text-muted" />
+                  <span>{user?.email || 'Admin'}</span>
+                </div>
+
+                <Button 
+                  variant="outline-danger" 
+                  size="sm" 
+                  className={styles.logoutBtn}
+                  onClick={handleSignOut}
+                >
+                  <BoxArrowRight /> Logout
+                </Button>
+              </div>
             </div>
             {children}
           </Col>

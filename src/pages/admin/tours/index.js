@@ -9,7 +9,7 @@ export default function AdminToursPage({ tours, error }) {
 export async function getServerSideProps() {
   const { data: tours, error } = await supabase
     .from('tours')
-    .select('id, name, slug, category_type, state_country, created_at')
+    .select('id, name, slug, category_type, state_country, region_continent, main_image, flags, created_at')
     .order('created_at', { ascending: false });
 
   return {

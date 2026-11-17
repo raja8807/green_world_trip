@@ -8,11 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 
   h2 {
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 700;
     color: #1f2d4d;
     margin: 0;
   }
@@ -21,46 +21,220 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 500;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 8px;
+  }
+}
+
+.filterCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #edf0f5;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 0.8fr;
+  gap: 12px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filterSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #f0f2f7;
+  font-size: 13px;
+  color: #6c757d;
+
+  .activeFilters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 }
 
 .tableWrapper {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #edf0f5;
+  overflow-x: auto;
 }
 
 .table {
   margin: 0;
+  vertical-align: middle;
 
   th {
     font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: #7c8795;
     border-bottom: 2px solid #eaeaea;
-    padding: 15px;
+    padding: 14px 12px;
+    white-space: nowrap;
   }
 
   td {
-    padding: 15px;
+    padding: 14px 12px;
     vertical-align: middle;
     color: #1f2d4d;
+    font-size: 14px;
   }
+}
+
+.tourThumbnail {
+  width: 52px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e5e9f0;
+  background-color: #f1f3f7;
+}
+
+.tourInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .tourLink {
   color: #1f2d4d;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #28a8ff;
+    color: #04a8e9;
     text-decoration: underline;
+  }
+}
+
+.tourSlug {
+  font-size: 12px;
+  color: #8c9ba5;
+  font-family: monospace;
+}
+
+.categoryBadge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  text-transform: capitalize;
+
+  &.domestic {
+    background-color: #eaf6ea;
+    color: #2e7d32;
+  }
+
+  &.international {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+
+  &.honeymoon {
+    background-color: #fce4ec;
+    color: #c2185b;
+  }
+
+  &.group {
+    background-color: #fff3e0;
+    color: #e65100;
+  }
+
+  &.default {
+    background-color: #f5f5f5;
+    color: #616161;
+  }
+}
+
+.flagBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 4px;
+  display: inline-block;
+
+  &.featured {
+    background-color: #fff8e1;
+    color: #b78103;
+    border: 1px solid #ffe082;
+  }
+
+  &.trending {
+    background-color: #ede7f6;
+    color: #512da8;
+    border: 1px solid #d1c4e9;
   }
 }
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 6px;
+  align-items: center;
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #edf0f5;
+
+  .pageInfo {
+    font-size: 13px;
+    color: #6c757d;
+  }
+
+  .pagination {
+    margin: 0;
+
+    .page-item .page-link {
+      color: #1f2d4d;
+      border-radius: 6px;
+      margin: 0 2px;
+      border-color: #dee2e6;
+      font-size: 13px;
+      padding: 6px 12px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .page-item.active .page-link {
+      background-color: #73b63b;
+      border-color: #73b63b;
+      color: #fff;
+    }
+
+    .page-item.disabled .page-link {
+      color: #adb5bd;
+    }
+  }
 }

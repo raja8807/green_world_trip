@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
 import { Trash, PencilSquare, Plus } from "react-bootstrap-icons";
 import { getImageUrl } from "@/utils/image";
+import { deleteFileFromR2 } from "@/utils/r2Upload";
 
 export default function AdminTopDestinationsPage({
   initialDestinations,
@@ -16,14 +17,22 @@ export default function AdminTopDestinationsPage({
 
   const handleDelete = async (id, title) => {
     if (confirm(`Are you sure you want to delete the destination: ${title}?`)) {
-      const { error } = await supabase
-        .from("top_destinations")
-        .delete()
-        .eq("id", id);
-      if (error) {
-        setDeleteError(error.message);
-      } else {
-        setDestinations(destinations.filter((d) => d.id !== id));
+      try {
+        const destToDelete = destinations.find((d) => d.id === id);
+        const { error } = await supabase
+          .from("top_destinations")
+          .delete()
+          .eq("id", id);
+        if (error) {
+          setDeleteError(error.message);
+        } else {
+          if (destToDelete?.image) {
+            await deleteFileFromR2(destToDelete.image);
+          }
+          setDestinations(destinations.filter((d) => d.id !== id));
+        }
+      } catch (err) {
+        setDeleteError(err.message || "Failed to delete destination and storage file.");
       }
     }
   };

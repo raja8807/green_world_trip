@@ -6,6 +6,13 @@ import { Country, State } from "country-state-city";
 import styles from "./tour_form.module.scss";
 import CustomContainer from "@/components/ui/custom_container/custom_container";
 import { getImageUrl } from "@/utils/image";
+import {
+  uploadFileToR2,
+  uploadMultipleFilesToR2,
+  deleteFileFromR2,
+  deleteMultipleFilesFromR2,
+} from "@/utils/r2Upload";
+import { Trash } from "react-bootstrap-icons";
 
 const CONTINENTS = [
   "Asia",
@@ -117,6 +124,7 @@ const TourForm = ({ initialData }) => {
   const isEdit = !!initialData;
   const [loading, setLoading] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [deletingMainImage, setDeletingMainImage] = useState(false);
   const [uploadingGallery, setUploadingGallery] = useState(false);
   const [uploadingItineraryImageMap, setUploadingItineraryImageMap] = useState(
     {},
@@ -224,26 +232,34 @@ const TourForm = ({ initialData }) => {
       const file = e.target.files[0];
       if (!file) return;
 
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const filePath = `images/${fileName}`;
+      // Delete previous main image from R2 before replacing with new one
+      if (formData.main_image) {
+        await deleteFileFromR2(formData.main_image);
+      }
 
-      const { error: uploadError } = await supabase.storage
-        .from("tours")
-        .upload(filePath, file);
-
-      if (uploadError) throw uploadError;
-
-      const { data } = supabase.storage.from("tours").getPublicUrl(filePath);
-
-      setFormData((prev) => ({ ...prev, main_image: data.publicUrl }));
+      const { key } = await uploadFileToR2(file, "images");
+      setFormData((prev) => ({ ...prev, main_image: key }));
     } catch (err) {
       setError(
-        err.message ||
-          "Error uploading image. Make sure the bucket exists and is public.",
+        err.message || "Error uploading image to Cloudflare R2."
       );
     } finally {
       setUploadingImage(false);
+    }
+  };
+
+  const handleRemoveMainImage = async () => {
+    if (!formData.main_image) return;
+    if (confirm("Are you sure you want to delete the main image from storage?")) {
+      try {
+        setDeletingMainImage(true);
+        await deleteFileFromR2(formData.main_image);
+        setFormData((prev) => ({ ...prev, main_image: "" }));
+      } catch (err) {
+        setError(err.message || "Error deleting main image from Cloudflare R2.");
+      } finally {
+        setDeletingMainImage(false);
+      }
     }
   };
 
@@ -255,35 +271,25 @@ const TourForm = ({ initialData }) => {
       const files = Array.from(e.target.files);
       if (files.length === 0) return;
 
-      const uploadPromises = files.map(async (file) => {
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-        const filePath = `gallery/${fileName}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("tours")
-          .upload(filePath, file);
-
-        if (uploadError) throw uploadError;
-
-        const { data } = supabase.storage.from("tours").getPublicUrl(filePath);
-        return data.publicUrl;
-      });
-
-      const uploadedUrls = await Promise.all(uploadPromises);
+      const results = await uploadMultipleFilesToR2(files, "gallery");
+      const uploadedKeys = results.map((r) => r.key);
 
       setFormData((prev) => ({
         ...prev,
-        images: [...prev.images, ...uploadedUrls],
+        images: [...prev.images, ...uploadedKeys],
       }));
     } catch (err) {
-      setError(err.message || "Error uploading gallery images.");
+      setError(err.message || "Error uploading gallery images to Cloudflare R2.");
     } finally {
       setUploadingGallery(false);
     }
   };
 
-  const removeGalleryImage = (index) => {
+  const removeGalleryImage = async (index) => {
+    const targetImage = formData.images[index];
+    if (targetImage) {
+      await deleteFileFromR2(targetImage);
+    }
     const newImages = [...formData.images];
     newImages.splice(index, 1);
     setFormData((prev) => ({ ...prev, images: newImages }));
@@ -319,7 +325,11 @@ const TourForm = ({ initialData }) => {
     }));
   };
 
-  const removeItineraryDay = (index) => {
+  const removeItineraryDay = async (index) => {
+    const dayToDelete = formData.itineraries[index];
+    if (dayToDelete?.images?.length) {
+      await deleteMultipleFilesFromR2(dayToDelete.images);
+    }
     const newItineraries = [...formData.itineraries];
     newItineraries.splice(index, 1);
     // Re-index days automatically
@@ -338,40 +348,47 @@ const TourForm = ({ initialData }) => {
       const files = Array.from(e.target.files);
       if (files.length === 0) return;
 
-      const uploadPromises = files.map(async (file) => {
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-        const filePath = `itinerary/${fileName}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("tours")
-          .upload(filePath, file);
-        if (uploadError) throw uploadError;
-
-        const { data } = supabase.storage.from("tours").getPublicUrl(filePath);
-        return data.publicUrl;
-      });
-
-      const uploadedUrls = await Promise.all(uploadPromises);
+      const results = await uploadMultipleFilesToR2(files, "itinerary");
+      const uploadedKeys = results.map((r) => r.key);
 
       const newItineraries = [...formData.itineraries];
       newItineraries[index].images = [
         ...(newItineraries[index].images || []),
-        ...uploadedUrls,
+        ...uploadedKeys,
       ];
 
       setFormData((prev) => ({ ...prev, itineraries: newItineraries }));
     } catch (err) {
-      setError(err.message || "Error uploading itinerary images.");
+      setError(err.message || "Error uploading itinerary images to Cloudflare R2.");
     } finally {
       setUploadingItineraryImageMap((prev) => ({ ...prev, [index]: false }));
     }
   };
 
-  const removeItineraryImage = (dayIndex, imgIndex) => {
+  const removeItineraryImage = async (dayIndex, imgIndex) => {
+    const targetImage = formData.itineraries[dayIndex]?.images?.[imgIndex];
+    if (targetImage) {
+      await deleteFileFromR2(targetImage);
+    }
     const newItineraries = [...formData.itineraries];
     newItineraries[dayIndex].images.splice(imgIndex, 1);
     setFormData((prev) => ({ ...prev, itineraries: newItineraries }));
+  };
+
+  const clearAllItineraryImages = async (dayIndex) => {
+    const imagesToDelete = formData.itineraries[dayIndex]?.images || [];
+    if (imagesToDelete.length === 0) return;
+
+    if (
+      confirm(
+        `Are you sure you want to delete all ${imagesToDelete.length} images for this day from storage?`
+      )
+    ) {
+      await deleteMultipleFilesFromR2(imagesToDelete);
+      const newItineraries = [...formData.itineraries];
+      newItineraries[dayIndex].images = [];
+      setFormData((prev) => ({ ...prev, itineraries: newItineraries }));
+    }
   };
   // --------------------------
 
@@ -637,28 +654,8 @@ const TourForm = ({ initialData }) => {
                   Main Image <span className="text-danger">*</span>
                 </Form.Label>
                 <Col sm={9}>
-                  <div className="d-flex gap-2 mb-2">
-                    <Form.Control
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      disabled={uploadingImage}
-                    />
-                    {uploadingImage && (
-                      <span className="align-self-center text-muted text-nowrap">
-                        Uploading...
-                      </span>
-                    )}
-                  </div>
-                  <Form.Control
-                    required
-                    name="main_image"
-                    value={formData.main_image}
-                    onChange={handleChange}
-                    placeholder="Or paste an image URL here..."
-                  />
-                  {formData.main_image && (
-                    <div className="mt-2">
+                  {formData.main_image ? (
+                    <div className="d-flex align-items-center gap-3 p-3 bg-light rounded border">
                       <img
                         src={getImageUrl(formData.main_image)}
                         alt="Preview"
@@ -667,9 +664,49 @@ const TourForm = ({ initialData }) => {
                           width: "auto",
                           borderRadius: "4px",
                           objectFit: "cover",
+                          border: "1px solid #dee2e6",
                         }}
                       />
+                      <div>
+                        <div className="text-muted small mb-2 text-break">
+                          <strong>Current Image:</strong> {formData.main_image}
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline-danger"
+                          size="sm"
+                          onClick={handleRemoveMainImage}
+                          disabled={deletingMainImage}
+                          className="d-flex align-items-center gap-1"
+                        >
+                          <Trash size={14} />
+                          {deletingMainImage ? "Deleting from storage..." : "Delete Main Image to Replace"}
+                        </Button>
+                      </div>
                     </div>
+                  ) : (
+                    <>
+                      <div className="d-flex gap-2 mb-2">
+                        <Form.Control
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          disabled={uploadingImage}
+                        />
+                        {uploadingImage && (
+                          <span className="align-self-center text-muted text-nowrap">
+                            Uploading...
+                          </span>
+                        )}
+                      </div>
+                      <Form.Control
+                        required
+                        name="main_image"
+                        value={formData.main_image}
+                        onChange={handleChange}
+                        placeholder="Or paste an image URL here..."
+                      />
+                    </>
                   )}
                 </Col>
               </Form.Group>
@@ -1065,39 +1102,58 @@ const TourForm = ({ initialData }) => {
                       </div>
 
                       {it.images && it.images.length > 0 && (
-                        <div className="d-flex flex-wrap gap-2 mt-2">
-                          {it.images.map((imgUrl, imgIdx) => (
-                            <div key={imgIdx} style={{ position: "relative" }}>
-                              <img
-                                src={getImageUrl(imgUrl)}
-                                alt="Itinerary"
-                                style={{
-                                  height: "60px",
-                                  width: "90px",
-                                  borderRadius: "4px",
-                                  objectFit: "cover",
-                                  border: "1px solid #ccc",
-                                }}
-                              />
-                              <Button
-                                variant="danger"
-                                size="sm"
-                                style={{
-                                  position: "absolute",
-                                  top: -5,
-                                  right: -5,
-                                  padding: "0 4px",
-                                  fontSize: "10px",
-                                  borderRadius: "50%",
-                                }}
-                                onClick={() =>
-                                  removeItineraryImage(idx, imgIdx)
-                                }
-                              >
-                                X
-                              </Button>
-                            </div>
-                          ))}
+                        <div>
+                          <div className="d-flex justify-content-between align-items-center mt-2 mb-1">
+                            <span className="text-muted small">
+                              {it.images.length} image{it.images.length > 1 ? "s" : ""} uploaded
+                            </span>
+                            <Button
+                              type="button"
+                              variant="outline-danger"
+                              size="sm"
+                              style={{ fontSize: "11px", padding: "2px 8px" }}
+                              onClick={() => clearAllItineraryImages(idx)}
+                              title="Delete all images for this day from storage"
+                            >
+                              <Trash size={12} className="me-1" /> Delete All Day Images
+                            </Button>
+                          </div>
+                          <div className="d-flex flex-wrap gap-2 mt-2">
+                            {it.images.map((imgUrl, imgIdx) => (
+                              <div key={imgIdx} style={{ position: "relative" }}>
+                                <img
+                                  src={getImageUrl(imgUrl)}
+                                  alt="Itinerary"
+                                  style={{
+                                    height: "60px",
+                                    width: "90px",
+                                    borderRadius: "4px",
+                                    objectFit: "cover",
+                                    border: "1px solid #ccc",
+                                  }}
+                                />
+                                <Button
+                                  type="button"
+                                  variant="danger"
+                                  size="sm"
+                                  style={{
+                                    position: "absolute",
+                                    top: -5,
+                                    right: -5,
+                                    padding: "0 4px",
+                                    fontSize: "10px",
+                                    borderRadius: "50%",
+                                  }}
+                                  title="Delete image from storage"
+                                  onClick={() =>
+                                    removeItineraryImage(idx, imgIdx)
+                                  }
+                                >
+                                  X
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </Form.Group>

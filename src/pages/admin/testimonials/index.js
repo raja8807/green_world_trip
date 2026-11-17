@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabaseClient';
 import Link from 'next/link';
 import { Trash, PencilSquare, Plus } from 'react-bootstrap-icons';
 import { getImageUrl } from '@/utils/image';
+import { deleteFileFromR2 } from '@/utils/r2Upload';
 
 export default function AdminTestimonialsPage({ initialTestimonials, error }) {
   const router = useRouter();
@@ -13,11 +14,19 @@ export default function AdminTestimonialsPage({ initialTestimonials, error }) {
 
   const handleDelete = async (id, name) => {
     if (confirm(`Are you sure you want to delete the testimonial from: ${name}?`)) {
-      const { error } = await supabase.from('testimonials').delete().eq('id', id);
-      if (error) {
-        setDeleteError(error.message);
-      } else {
-        setTestimonials(testimonials.filter(t => t.id !== id));
+      try {
+        const itemToDelete = testimonials.find((t) => t.id === id);
+        const { error } = await supabase.from('testimonials').delete().eq('id', id);
+        if (error) {
+          setDeleteError(error.message);
+        } else {
+          if (itemToDelete?.image) {
+            await deleteFileFromR2(itemToDelete.image);
+          }
+          setTestimonials(testimonials.filter((t) => t.id !== id));
+        }
+      } catch (err) {
+        setDeleteError(err.message || 'Failed to delete testimonial and storage file.');
       }
     }
   };

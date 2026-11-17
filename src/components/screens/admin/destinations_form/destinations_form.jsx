@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { supabase } from '@/lib/supabaseClient';
+import { uploadFileToR2, deleteFileFromR2 } from '@/utils/r2Upload';
+import { getImageUrl } from '@/utils/image';
+import { Trash } from 'react-bootstrap-icons';
 
 const DestinationsForm = ({ initialData }) => {
   const router = useRouter();
@@ -16,6 +19,8 @@ const DestinationsForm = ({ initialData }) => {
     }
   );
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [deletingImage, setDeletingImage] = useState(false);
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -24,6 +29,42 @@ const DestinationsForm = ({ initialData }) => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  };
+
+  const handleImageUpload = async (e) => {
+    try {
+      setUploadingImage(true);
+      setError('');
+      const file = e.target.files[0];
+      if (!file) return;
+
+      // Delete old image if replacing
+      if (formData.image) {
+        await deleteFileFromR2(formData.image);
+      }
+
+      const { key } = await uploadFileToR2(file, 'destinations');
+      setFormData((prev) => ({ ...prev, image: key }));
+    } catch (err) {
+      setError(err.message || 'Error uploading image to Cloudflare R2.');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleRemoveImage = async () => {
+    if (!formData.image) return;
+    if (confirm('Are you sure you want to delete this destination image from storage?')) {
+      try {
+        setDeletingImage(true);
+        await deleteFileFromR2(formData.image);
+        setFormData((prev) => ({ ...prev, image: '' }));
+      } catch (err) {
+        setError(err.message || 'Error deleting image from Cloudflare R2.');
+      } finally {
+        setDeletingImage(false);
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -105,15 +146,62 @@ const DestinationsForm = ({ initialData }) => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Image URL</Form.Label>
-          <Form.Control
-            type="url"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            required
-            placeholder="https://..."
-          />
+          <Form.Label>Destination Image</Form.Label>
+          {formData.image ? (
+            <div className="d-flex align-items-center gap-3 p-3 bg-light rounded border">
+              <img
+                src={getImageUrl(formData.image)}
+                alt="Preview"
+                style={{
+                  height: "90px",
+                  width: "140px",
+                  borderRadius: "4px",
+                  objectFit: "cover",
+                  border: "1px solid #dee2e6"
+                }}
+              />
+              <div>
+                <div className="text-muted small mb-2 text-break">
+                  <strong>Current Image:</strong> {formData.image}
+                </div>
+                <Button
+                  type="button"
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={handleRemoveImage}
+                  disabled={deletingImage}
+                  className="d-flex align-items-center gap-1"
+                >
+                  <Trash size={14} />
+                  {deletingImage ? "Deleting from storage..." : "Delete Image to Replace"}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="d-flex gap-2 mb-2">
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  disabled={uploadingImage}
+                />
+                {uploadingImage && (
+                  <span className="align-self-center text-muted text-nowrap">
+                    Uploading...
+                  </span>
+                )}
+              </div>
+              <Form.Control
+                type="text"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                required
+                placeholder="Or paste an image URL / path..."
+              />
+            </>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3">
