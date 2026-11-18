@@ -27,14 +27,14 @@
   padding: 28px 24px;
   border-radius: 16px;
   background: $bg-cream;
-  border: 1px solid rgba(23, 75, 54, 0.08);
+  border: 1px solid $border-soft;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
     background: #ffffff;
-    box-shadow: 0 12px 30px rgba(23, 75, 54, 0.08);
+    box-shadow: 0 12px 30px rgba(115, 183, 60, 0.12);
     transform: translateY(-4px);
-    border-color: rgba(217, 183, 121, 0.4);
+    border-color: rgba(115, 183, 60, 0.4);
 
     .iconWrapper {
       background: $primary-green;
@@ -58,7 +58,7 @@
   width: 58px;
   height: 58px;
   border-radius: 16px;
-  background: rgba(23, 75, 54, 0.08);
+  background: rgba(115, 183, 60, 0.1);
   color: $primary-green;
   font-size: 26px;
   flex-shrink: 0;

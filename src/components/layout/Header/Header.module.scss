@@ -1,22 +1,32 @@
 .header {
-  position: relative;
-  z-index: 1000;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
   width: 100%;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .topBarWrap {
+    overflow: hidden;
+    transition:
+      margin-top 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.22s ease;
+  }
 
   &.isSticky {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1020;
-    box-shadow: 0 4px 20px rgba(23, 75, 54, 0.08);
+    box-shadow: 0 4px 20px rgba(20, 40, 20, 0.08);
+
+    .topBarWrap {
+      margin-top: -43px;
+      opacity: 0;
+      pointer-events: none;
+    }
 
     .mainHead {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(23, 75, 54, 0.06);
+      border-bottom: 1px solid rgba(115, 183, 60, 0.12);
+      border-bottom: 1px solid $primary-green;
 
       .wrap {
         padding: 12px 0;
@@ -35,7 +45,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 0;
+    padding: 16px 0;
     transition: padding 0.3s ease;
 
     .left {
@@ -72,7 +82,7 @@
               transition: color 0.25s ease;
 
               &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -120,7 +130,9 @@
                 display: flex;
                 flex-direction: column;
                 gap: 6px;
-                box-shadow: 0 12px 36px rgba(23, 75, 54, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+                box-shadow:
+                  0 12px 36px rgba(20, 40, 20, 0.1),
+                  0 2px 8px rgba(0, 0, 0, 0.04);
                 border: 1px solid $border-soft;
                 animation: openDropDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
                 transform-origin: top;
@@ -144,7 +156,7 @@
                   }
 
                   &:hover {
-                    background-color: rgba(23, 75, 54, 0.06);
+                    background-color: rgba(115, 183, 60, 0.08);
                     color: $primary-green;
                     padding-left: 18px;
                   }
@@ -167,7 +179,7 @@
                       display: flex;
                       flex-direction: column;
                       gap: 6px;
-                      box-shadow: 0 12px 36px rgba(23, 75, 54, 0.12);
+                      box-shadow: 0 12px 36px rgba(20, 40, 20, 0.1);
                       border: 1px solid $border-soft;
                     }
                   }
@@ -191,20 +203,20 @@
         background: $primary-green;
         color: #ffffff;
         font-size: 13.5px;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: 0.5px;
         text-transform: uppercase;
-        padding: 10px 22px;
+        padding: 10px 24px;
         border-radius: 50px;
         text-decoration: none;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 4px 14px rgba(23, 75, 54, 0.25);
+        box-shadow: 0 4px 14px rgba(115, 183, 60, 0.25);
         border: 1px solid transparent;
 
         &:hover {
-          background: #0E3324;
+          background: $primary-green-dark;
           transform: translateY(-2px);
-          box-shadow: 0 6px 18px rgba(23, 75, 54, 0.35);
+          box-shadow: 0 6px 18px rgba(115, 183, 60, 0.35);
           color: #ffffff;
         }
 

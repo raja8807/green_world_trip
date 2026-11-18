@@ -31,14 +31,14 @@ const IndiaScreen = () => {
             <IndiaMap
               type="select-single"
               size={700}
-              mapColor="#174B36"
-              strokeColor="#0E3324"
+              mapColor="#73b73c"
+              strokeColor="#ffffff"
               strokeWidth={1.5}
-              hoverColor="#D9B779"
-              selectColor="#8DAA91"
+              hoverColor="#05a8e9"
+              selectColor="#038bc2"
               hints={true}
-              hintTextColor="#202923"
-              hintBackgroundColor="#FAFAF7"
+              hintTextColor="#1c271e"
+              hintBackgroundColor="#ffffff"
               hintPadding="12px 18px"
               hintBorderRadius={8}
               onSelect={handleStateSelect}

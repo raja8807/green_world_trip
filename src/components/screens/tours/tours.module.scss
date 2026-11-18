@@ -80,7 +80,7 @@
   background: #ffffff;
   border-radius: 18px;
   padding: 26px;
-  box-shadow: 0 8px 24px rgba(23, 75, 54, 0.06);
+  box-shadow: 0 8px 24px rgba(115, 183, 60, 0.06);
   border: 1px solid $border-soft;
 
   h4 {
@@ -139,7 +139,7 @@
     font-size: 15px;
     transition: all 0.25s ease;
     background-color: #ffffff;
-    box-shadow: 0 4px 16px rgba(23, 75, 54, 0.04);
+    box-shadow: 0 4px 16px rgba(115, 183, 60, 0.04);
     height: 52px;
     color: $text-charcoal;
 
@@ -150,7 +150,7 @@
     &:focus {
       outline: none;
       border-color: $primary-green;
-      box-shadow: 0 4px 18px rgba(23, 75, 54, 0.15);
+      box-shadow: 0 4px 18px rgba(115, 183, 60, 0.15);
     }
   }
 }
@@ -165,7 +165,7 @@
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(23, 75, 54, 0.15);
+    background-color: rgba(115, 183, 60, 0.15);
     border-radius: 4px;
   }
 }
@@ -218,7 +218,7 @@
   font-size: 16px;
   background: #ffffff;
   border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(23, 75, 54, 0.04);
+  box-shadow: 0 8px 24px rgba(115, 183, 60, 0.08);
   border: 1px solid $border-soft;
 
   p {
@@ -236,10 +236,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(23, 75, 54, 0.2);
+  box-shadow: 0 4px 12px rgba(115, 183, 60, 0.25);
 
   &:hover {
-    background: #0E3324;
+    background: $primary-green-dark;
     transform: translateY(-2px);
   }
 }

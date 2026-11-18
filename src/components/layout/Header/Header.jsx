@@ -114,15 +114,17 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 50);
+      setIsSticky(window.scrollY > 40);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header className={`${styles.header} ${isSticky ? styles.isSticky : ""}`}>
-      <TopHeader />
+      <div className={styles.topBarWrap}>
+        <TopHeader />
+      </div>
       <div className={styles.mainHead}>
         <CustomContainer lg>
           <div className={styles.wrap}>

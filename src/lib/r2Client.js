@@ -11,7 +11,7 @@ const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
 export const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
 
 export const isR2Configured = Boolean(
-  accountId && accessKeyId && secretAccessKey && R2_BUCKET_NAME
+  accountId && accessKeyId && secretAccessKey && R2_BUCKET_NAME,
 );
 
 export const r2Client = new S3Client({
@@ -37,7 +37,9 @@ export function extractR2Key(pathOrUrl) {
   if (!pathOrUrl || typeof pathOrUrl !== "string") return null;
 
   let clean = pathOrUrl.trim();
-  const cdnUrl = (process.env.NEXT_PUBLIC_CDN_URL || "").trim().replace(/\/+$/, "");
+  const cdnUrl = (process.env.NEXT_PUBLIC_CDN_URL || "")
+    .trim()
+    .replace(/\/+$/, "");
 
   // If starts with configured CDN URL, remove it
   if (cdnUrl && clean.startsWith(cdnUrl)) {
@@ -45,7 +47,9 @@ export function extractR2Key(pathOrUrl) {
   }
 
   // If it's a known R2 folder relative path (e.g. images/..., gallery/..., itinerary/...)
-  if (/^(images|gallery|itinerary|destinations|testimonials)\/.+/i.test(clean)) {
+  if (
+    /^(images|gallery|itinerary|destinations|testimonials)\/.+/i.test(clean)
+  ) {
     return clean;
   }
 
@@ -80,13 +84,13 @@ export function extractR2Key(pathOrUrl) {
 export async function uploadToR2({ buffer, key, contentType }) {
   if (!isR2Configured) {
     throw new Error(
-      "Cloudflare R2 is not fully configured. Please set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, and R2_BUCKET_NAME in your environment variables."
+      "Cloudflare R2 is not fully configured. Please set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, and R2_BUCKET_NAME in your environment variables.",
     );
   }
 
   if (accountId && accountId.startsWith("cfat_")) {
     throw new Error(
-      "Invalid R2_ACCOUNT_ID: An API Token (starting with 'cfat_') was provided instead of your Cloudflare Account ID. Please check your Cloudflare Dashboard (dash.cloudflare.com/<account_id>/r2) for your 32-character Account ID."
+      "Invalid R2_ACCOUNT_ID: An API Token (starting with 'cfat_') was provided instead of your Cloudflare Account ID. Please check your Cloudflare Dashboard (dash.cloudflare.com/<account_id>/r2) for your 32-character Account ID.",
     );
   }
 
@@ -130,13 +134,15 @@ export async function deleteFromR2(pathOrUrl) {
  * @returns {Promise<string[]>} - Array of successfully deleted keys
  */
 export async function deleteMultipleFromR2(pathsOrUrls) {
-  if (!isR2Configured || !Array.isArray(pathsOrUrls) || pathsOrUrls.length === 0) {
+  if (
+    !isR2Configured ||
+    !Array.isArray(pathsOrUrls) ||
+    pathsOrUrls.length === 0
+  ) {
     return [];
   }
 
-  const validKeys = pathsOrUrls
-    .map(extractR2Key)
-    .filter(Boolean);
+  const validKeys = pathsOrUrls.map(extractR2Key).filter(Boolean);
 
   if (validKeys.length === 0) return [];
 

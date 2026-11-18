@@ -1,7 +1,7 @@
 .footer {
-  background-color: #0c2a1e;
+  background-color: #131d14;
   padding: 80px 0 30px;
-  color: #d8ded9;
+  color: #d6ded7;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -19,11 +19,13 @@
     max-width: 190px;
     margin-bottom: 22px;
     display: block;
-    filter: brightness(1.05);
+    background: #ffffff;
+    padding: 10px 16px;
+    border-radius: 12px;
   }
 
   .description {
-    color: #9eb2a4;
+    color: #9aa89d;
     font-size: 14px;
     line-height: 1.7;
     margin-bottom: 25px;
@@ -35,7 +37,7 @@
     align-items: center;
 
     .followText {
-      color: #9eb2a4;
+      color: #9aa89d;
       font-size: 13.5px;
       font-weight: 500;
       margin-right: 15px;
@@ -51,7 +53,7 @@
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.06);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #d8ded9;
+        color: #d6ded7;
         font-size: 15px;
         display: flex;
         align-items: center;
@@ -60,9 +62,9 @@
         transition: all 0.25s ease;
 
         &:hover {
-          background: $accent-gold;
-          color: #0c2a1e;
-          border-color: $accent-gold;
+          background: $primary-green;
+          color: #ffffff;
+          border-color: $primary-green;
           transform: translateY(-2px);
         }
       }
@@ -86,7 +88,7 @@
     left: 0;
     width: 28px;
     height: 2px;
-    background: $accent-gold;
+    background: $primary-green;
     border-radius: 2px;
   }
 }
@@ -101,7 +103,7 @@
     margin-bottom: 12px;
 
     a {
-      color: #9eb2a4;
+      color: #9aa89d;
       text-decoration: none;
       font-size: 14px;
       display: flex;
@@ -109,10 +111,10 @@
       transition: all 0.2s ease;
 
       .bulletIcon {
-        color: $accent-gold;
+        color: $primary-green;
         font-size: 11px;
         margin-right: 8px;
-        opacity: 0.7;
+        opacity: 0.8;
         transition: transform 0.2s ease, opacity 0.2s ease;
       }
 
@@ -122,6 +124,7 @@
 
         .bulletIcon {
           opacity: 1;
+          color: $accent-blue;
         }
       }
     }
@@ -135,17 +138,17 @@
 
   li {
     margin-bottom: 16px;
-    color: #9eb2a4;
+    color: #9aa89d;
     font-size: 14px;
     line-height: 1.6;
 
     a {
-      color: #9eb2a4;
+      color: #9aa89d;
       text-decoration: none;
       transition: color 0.2s ease;
 
       &:hover {
-        color: $accent-gold;
+        color: $primary-green;
       }
     }
   }
@@ -153,7 +156,7 @@
   .address {
     display: block;
     font-style: normal;
-    color: #9eb2a4;
+    color: #9aa89d;
   }
 
   .contactItem {
@@ -173,7 +176,7 @@
   gap: 15px;
 
   .copyright {
-    color: #849b8b;
+    color: #7b8e7e;
     font-size: 13.5px;
     margin-bottom: 0;
   }
@@ -186,13 +189,13 @@
     list-style: none;
 
     a {
-      color: #849b8b;
+      color: #7b8e7e;
       font-size: 13px;
       text-decoration: none;
       transition: color 0.2s ease;
 
       &:hover {
-        color: $accent-gold;
+        color: $primary-green;
       }
     }
   }

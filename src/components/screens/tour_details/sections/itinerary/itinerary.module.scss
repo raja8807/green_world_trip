@@ -23,7 +23,7 @@
       left: 0;
       width: 32px;
       height: 2px;
-      background: $accent-gold;
+      background: $primary-green;
       border-radius: 2px;
     }
   }
@@ -37,16 +37,16 @@
     border-left: 4px solid $primary-green;
     overflow: hidden;
     background: #ffffff;
-    box-shadow: 0 4px 16px rgba(23, 75, 54, 0.04);
+    box-shadow: 0 4px 16px rgba(20, 35, 20, 0.04);
     transition: all 0.25s ease;
 
     &:hover {
-      box-shadow: 0 8px 24px rgba(23, 75, 54, 0.08);
+      box-shadow: 0 8px 24px rgba(20, 35, 20, 0.08);
     }
   }
 
   :global(.accordion-item:nth-child(even)) {
-    border-left-color: $accent-gold;
+    border-left-color: $accent-blue;
   }
 
   :global(.accordion-button) {
@@ -63,7 +63,7 @@
 
     &:not(.collapsed) {
       border-bottom: 1px solid $border-soft;
-      background-color: rgba(23, 75, 54, 0.02) !important;
+      background-color: rgba(115, 183, 60, 0.04) !important;
 
       .dayHead {
         color: $primary-green;

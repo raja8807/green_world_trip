@@ -3,7 +3,9 @@ import styles from "./featured.module.scss";
 import TourCard from "@/components/common/tour_card/tour_card";
 import CustomContainer from "@/components/ui/custom_container/custom_container";
 import SectionHeading from "@/components/common/section_heading/section_heading";
-import { Col, Row } from "react-bootstrap";
+import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 import { supabase } from "@/lib/supabaseClient";
 
 const FeaturedTours = () => {
@@ -16,8 +18,8 @@ const FeaturedTours = () => {
         const { data, error } = await supabase
           .from("tours")
           .select("*")
-          .contains('flags', { is_featured: true })
-          .limit(4);
+          .contains("flags", { is_featured: true })
+          .limit(9);
 
         if (error) throw error;
         
@@ -48,15 +50,51 @@ const FeaturedTours = () => {
                <p className="text-muted">Loading featured tours...</p>
              </div>
           ) : tours && tours.length > 0 ? (
-            <Row className="g-4">
-              {tours.map((tour) => {
-                return (
-                  <Col key={tour.id} xs={12} sm={6} lg={3}>
+            <div className={styles.sliderWrapper}>
+              <Slide
+                slidesToShow={1}
+                slidesToScroll={1}
+                infinite={tours.length > 3}
+                indicators={false}
+                autoplay={true}
+                duration={4200}
+                transitionDuration={600}
+                pauseOnHover={true}
+                canSwipe={true}
+                prevArrow={
+                  <button className={`${styles.arrowBtn} ${styles.prevArrow}`} aria-label="Previous tour">
+                    <ChevronLeft size={18} />
+                  </button>
+                }
+                nextArrow={
+                  <button className={`${styles.arrowBtn} ${styles.nextArrow}`} aria-label="Next tour">
+                    <ChevronRight size={18} />
+                  </button>
+                }
+                responsive={[
+                  {
+                    breakpoint: 992,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 1,
+                    },
+                  },
+                  {
+                    breakpoint: 640,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                    },
+                  },
+                ]}
+              >
+                {tours.map((tour) => (
+                  <div key={tour.id} className={styles.slideItem}>
                     <TourCard tour={tour} />
-                  </Col>
-                );
-              })}
-            </Row>
+                  </div>
+                ))}
+              </Slide>
+            </div>
           ) : (
              <div className={styles.emptyState}>
                <p className="text-muted">No featured tours available right now.</p>

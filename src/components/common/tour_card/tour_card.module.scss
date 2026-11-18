@@ -81,8 +81,8 @@
 }
 
 .featuredBadge {
-  background: linear-gradient(135deg, #e3c488 0%, #c49a50 100%);
-  color: #1a160d;
+  background: linear-gradient(135deg, #73b73c 0%, #5e9e2e 100%);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -91,11 +91,11 @@
   border-radius: $radius-pill;
   display: inline-flex;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 12px rgba(115, 183, 60, 0.3);
 }
 
 .trendingBadge {
-  background: rgba($primary-green-dark, 0.85);
+  background: rgba(5, 168, 233, 0.9);
   backdrop-filter: blur(8px);
   color: #ffffff;
   font-size: 11px;
@@ -104,7 +104,7 @@
   text-transform: uppercase;
   padding: 5px 11px;
   border-radius: $radius-pill;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(5, 168, 233, 0.3);
 }
 
 .categoryBadge {

@@ -163,16 +163,16 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(23, 75, 54, 0.25);
+  box-shadow: 0 4px 14px rgba(115, 183, 60, 0.25);
 
   .btnIcon {
     font-size: 14px;
   }
 
   &:hover {
-    background: #0E3324;
+    background: $primary-green-dark;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(23, 75, 54, 0.35);
+    box-shadow: 0 6px 18px rgba(115, 183, 60, 0.35);
   }
 
   &:active {

@@ -29,9 +29,9 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(10, 26, 18, 0.1) 0%,
-      rgba(10, 26, 18, 0.4) 45%,
-      rgba(10, 26, 18, 0.92) 100%
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      rgba(0, 0, 0, 0.85) 100%
     );
     transition: opacity 0.3s ease;
   }
@@ -51,14 +51,14 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: $accent-gold;
-      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      background: rgba(115, 183, 60, 0.4);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       padding: 4px 12px;
       border-radius: 30px;
       margin-bottom: 12px;
-      border: 1px solid rgba(217, 183, 121, 0.3);
+      border: 1px solid rgba(115, 183, 60, 0.7);
     }
 
     h3 {
@@ -82,8 +82,8 @@
       align-items: center;
       gap: 8px;
       font-size: 13.5px;
-      font-weight: 600;
-      color: $accent-gold;
+      font-weight: 700;
+      color: $accent-blue;
       letter-spacing: 0.5px;
       transition: gap 0.25s ease, color 0.25s ease;
 
