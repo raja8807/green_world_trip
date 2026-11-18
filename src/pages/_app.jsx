@@ -52,7 +52,7 @@ export default function App({ Component, pageProps }) {
   const isHome = router.pathname === "/";
   const isAdmin = router.pathname.startsWith("/admin");
 
-  const isUnderConstruction = false;
+  const isUnderConstruction = true;
 
   if (process.env.NEXT_PUBLIC_ENV !== "DEV" && isUnderConstruction && !isAdmin) {
     return <UnderConstruction />;
